@@ -1,0 +1,35 @@
+# Ignore DBManager.cs
+DBManager.cs
+
+# Ignore build output directories
+bin/
+obj/
+Debug/
+Release/
+
+# Ignore Visual Studio specific files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore temporary files
+*.tmp
+*.bak
+~$*
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore compiled binaries
+*.dll
+*.exe
+
+# Ignore package manager directories
+node_modules/
+packages/
