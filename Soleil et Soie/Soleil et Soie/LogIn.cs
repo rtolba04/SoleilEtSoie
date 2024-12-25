@@ -43,6 +43,8 @@ namespace Soleil_et_Soie
                 {
                     //this is just for testing
                     MessageBox.Show("You are an admin");
+                    adminFunctionalities f = new adminFunctionalities();
+                    f.Show();
                 }
             }
         }

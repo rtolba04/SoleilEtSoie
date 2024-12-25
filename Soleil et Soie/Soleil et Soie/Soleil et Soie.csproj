@@ -52,6 +52,12 @@
     <Compile Include="adminFunctionalities.Designer.cs">
       <DependentUpon>adminFunctionalities.cs</DependentUpon>
     </Compile>
+    <Compile Include="admin_create_update_users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin_create_update_users.Designer.cs">
+      <DependentUpon>admin_create_update_users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="Profile.cs">
@@ -88,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="adminFunctionalities.resx">
       <DependentUpon>adminFunctionalities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admin_create_update_users.resx">
+      <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>

@@ -29,48 +29,23 @@
         private void InitializeComponent()
         {
             this.create_user_button = new System.Windows.Forms.Button();
-            this.view_pending_button = new System.Windows.Forms.Button();
-            this.view_pending_dg = new System.Windows.Forms.DataGridView();
             this.select_pending_combo = new System.Windows.Forms.ComboBox();
             this.select_user_label = new System.Windows.Forms.Label();
-            this.activate_button = new System.Windows.Forms.Button();
-            this.deact_button = new System.Windows.Forms.Button();
-            this.del_inactive_button = new System.Windows.Forms.Button();
+            this.del_button = new System.Windows.Forms.Button();
             this.viewall_button = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.view_pending_dg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // create_user_button
             // 
-            this.create_user_button.Location = new System.Drawing.Point(35, 24);
+            this.create_user_button.Location = new System.Drawing.Point(96, 23);
             this.create_user_button.Name = "create_user_button";
-            this.create_user_button.Size = new System.Drawing.Size(195, 38);
+            this.create_user_button.Size = new System.Drawing.Size(134, 51);
             this.create_user_button.TabIndex = 0;
-            this.create_user_button.Text = "Create new admin/designer ";
+            this.create_user_button.Text = "Create/Update admin/designer ";
             this.create_user_button.UseVisualStyleBackColor = true;
             this.create_user_button.Click += new System.EventHandler(this.create_user_button_Click);
-            // 
-            // view_pending_button
-            // 
-            this.view_pending_button.Location = new System.Drawing.Point(63, 97);
-            this.view_pending_button.Name = "view_pending_button";
-            this.view_pending_button.Size = new System.Drawing.Size(135, 35);
-            this.view_pending_button.TabIndex = 1;
-            this.view_pending_button.Text = "View pending users";
-            this.view_pending_button.UseVisualStyleBackColor = true;
-            this.view_pending_button.Click += new System.EventHandler(this.view_pending_button_Click);
-            // 
-            // view_pending_dg
-            // 
-            this.view_pending_dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.view_pending_dg.Location = new System.Drawing.Point(12, 138);
-            this.view_pending_dg.Name = "view_pending_dg";
-            this.view_pending_dg.RowHeadersWidth = 51;
-            this.view_pending_dg.RowTemplate.Height = 24;
-            this.view_pending_dg.Size = new System.Drawing.Size(279, 191);
-            this.view_pending_dg.TabIndex = 2;
             // 
             // select_pending_combo
             // 
@@ -85,40 +60,22 @@
             this.select_user_label.AutoSize = true;
             this.select_user_label.Location = new System.Drawing.Point(9, 370);
             this.select_user_label.Name = "select_user_label";
-            this.select_user_label.Size = new System.Drawing.Size(127, 16);
+            this.select_user_label.Size = new System.Drawing.Size(130, 16);
             this.select_user_label.TabIndex = 4;
-            this.select_user_label.Text = "select pending user:";
+            this.select_user_label.Text = "select user to delete:";
             // 
-            // activate_button
+            // del_button
             // 
-            this.activate_button.Location = new System.Drawing.Point(12, 427);
-            this.activate_button.Name = "activate_button";
-            this.activate_button.Size = new System.Drawing.Size(100, 23);
-            this.activate_button.TabIndex = 5;
-            this.activate_button.Text = "Activate user";
-            this.activate_button.UseVisualStyleBackColor = true;
-            // 
-            // deact_button
-            // 
-            this.deact_button.Location = new System.Drawing.Point(145, 427);
-            this.deact_button.Name = "deact_button";
-            this.deact_button.Size = new System.Drawing.Size(128, 23);
-            this.deact_button.TabIndex = 6;
-            this.deact_button.Text = "Deactivate User";
-            this.deact_button.UseVisualStyleBackColor = true;
-            // 
-            // del_inactive_button
-            // 
-            this.del_inactive_button.Location = new System.Drawing.Point(517, 345);
-            this.del_inactive_button.Name = "del_inactive_button";
-            this.del_inactive_button.Size = new System.Drawing.Size(154, 23);
-            this.del_inactive_button.TabIndex = 7;
-            this.del_inactive_button.Text = "Delete Inactive Users";
-            this.del_inactive_button.UseVisualStyleBackColor = true;
+            this.del_button.Location = new System.Drawing.Point(89, 422);
+            this.del_button.Name = "del_button";
+            this.del_button.Size = new System.Drawing.Size(128, 23);
+            this.del_button.TabIndex = 6;
+            this.del_button.Text = "Delete User";
+            this.del_button.UseVisualStyleBackColor = true;
             // 
             // viewall_button
             // 
-            this.viewall_button.Location = new System.Drawing.Point(530, 97);
+            this.viewall_button.Location = new System.Drawing.Point(89, 99);
             this.viewall_button.Name = "viewall_button";
             this.viewall_button.Size = new System.Drawing.Size(141, 23);
             this.viewall_button.TabIndex = 8;
@@ -128,7 +85,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(449, 138);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 137);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -142,17 +99,12 @@
             this.ClientSize = new System.Drawing.Size(943, 537);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.viewall_button);
-            this.Controls.Add(this.del_inactive_button);
-            this.Controls.Add(this.deact_button);
-            this.Controls.Add(this.activate_button);
+            this.Controls.Add(this.del_button);
             this.Controls.Add(this.select_user_label);
             this.Controls.Add(this.select_pending_combo);
-            this.Controls.Add(this.view_pending_dg);
-            this.Controls.Add(this.view_pending_button);
             this.Controls.Add(this.create_user_button);
             this.Name = "manage_users";
             this.Text = "manage_users";
-            ((System.ComponentModel.ISupportInitialize)(this.view_pending_dg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -162,13 +114,9 @@
         #endregion
 
         private System.Windows.Forms.Button create_user_button;
-        private System.Windows.Forms.Button view_pending_button;
-        private System.Windows.Forms.DataGridView view_pending_dg;
         private System.Windows.Forms.ComboBox select_pending_combo;
         private System.Windows.Forms.Label select_user_label;
-        private System.Windows.Forms.Button activate_button;
-        private System.Windows.Forms.Button deact_button;
-        private System.Windows.Forms.Button del_inactive_button;
+        private System.Windows.Forms.Button del_button;
         private System.Windows.Forms.Button viewall_button;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
