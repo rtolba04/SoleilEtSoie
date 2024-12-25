@@ -10,6 +10,7 @@ namespace Soleil_et_Soie
 {
     public class DBManager
     {
+<<<<<<< HEAD
         //TODO: Make Sure to change Connection String to your Database 
 
         static string DB_Connection_String = @"Data Source=DESKTOP-59GQ678\SQLEXPRESS;Initial Catalog=CompanyDBLab5;Integrated Security=True;Encrypt=False";
@@ -99,5 +100,4 @@ namespace Soleil_et_Soie
 
 
     }
-}
-;
+};
