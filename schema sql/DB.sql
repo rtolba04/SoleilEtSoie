@@ -177,3 +177,31 @@ ON DELETE SET NULL;
 
 INSERT INTO Users (UserName, Password, PhoneNumber, Address, Email, DateCreated, UserType, Status)VALUES 
 ('Soleil et Soie' , 'password',01234567890,'123 Baker st.','soleil.fashion@gmail.com','2024/12/23','admin','active');
+
+ALTER TABLE Designs
+ADD Material_ID INT;
+
+ALTER TABLE Designs
+ADD CONSTRAINT FK_Design_Material foreign key (Material_ID) references Materials(MaterialID)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+ALTER TABLE Designs
+ADD Collection_ID INT;
+
+ALTER TABLE Designs
+ADD CONSTRAINT FK_Design_Collection foreign key (Collection_ID) references Collection(CollectionID)
+ON UPDATE no action
+ON DELETE no action;
+
+ALTER TABLE Designs
+ADD Category_ID INT;
+
+ALTER TABLE Designs
+ADD CONSTRAINT FK_Design_category foreign key (Category_ID) references Category(CategoryID)
+ON UPDATE no action
+ON DELETE no action;
+
+ALTER TABLE Designs
+ADD Material_Quantity INT;
+
