@@ -41,19 +41,31 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
-        public int createuser(string un,string pw,int pn,string e,string g,string ut, string dc)
+        public int LoggedIn(string username)
         {
-            string query;
-            if (g == "NULL")
-            {
-                
-            }
-            else
-            {
-                
-            }
+            string query = "UPDATE Users SET status = 'logged in' WHERE UserName = '" + username + "';";
             return dbMan.ExecuteNonQuery(query);
         }
+
+        public int LoggedOut(string username)
+        {
+            string query = "UPDATE Users SET status = 'logged out' WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        //public int createuser(string un,string pw,int pn,string e,string g,string ut, string dc)
+        //{
+        //    string query;
+        //    if (g == "NULL")
+        //    {
+                
+        //    }
+        //    else
+        //    {
+                
+        //    }
+        //    return dbMan.ExecuteNonQuery(query);
+        //}
 
 
 

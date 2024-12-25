@@ -40,5 +40,11 @@ namespace Soleil_et_Soie
         {
             userprofile.Show();
         }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            int result = controllerObj.LoggedOut(UsernameLabel.Text);
+            this.Close();
+        }
     }
 }

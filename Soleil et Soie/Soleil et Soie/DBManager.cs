@@ -10,7 +10,7 @@ namespace Soleil_et_Soie
 {
     public class DBManager
     {
-        static string DB_Connection_String = @"Data Source=DESKTOP-DP92LNP\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True;Encrypt=FalseData Source=DESKTOP-DP92LNP\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True;Encrypt=False";
+        static string DB_Connection_String = @"Data Source=DESKTOP-59GQ678\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True;Encrypt=False";
         SqlConnection myConnection;
 
         public DBManager()
