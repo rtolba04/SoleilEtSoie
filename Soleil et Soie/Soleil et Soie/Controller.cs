@@ -39,6 +39,12 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
+        public DataTable getPending()
+        {
+            string query = $"select * from Users where Users.Status = 'pending';";
+            return dbMan.ExecuteReader(query);
+        }
+
 
 
     }
