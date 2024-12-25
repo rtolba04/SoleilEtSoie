@@ -21,15 +21,10 @@ namespace Soleil_et_Soie
 
         private void create_user_button_Click(object sender, EventArgs e)
         {
-            SignIn f = new SignIn();
+            admin_create_update_users f = new admin_create_update_users();
             f.Show();
         }
 
-        private void view_pending_button_Click(object sender, EventArgs e)
-        {
-            DataTable dt = controllerObj.getPending();
-            view_pending_dg.DataSource = dt;
-            view_pending_dg.Refresh();
-        }
+
     }
 }
