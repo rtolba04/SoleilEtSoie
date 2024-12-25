@@ -178,6 +178,7 @@ Use SoleiletSoie
 --ADD CONSTRAINT FK_Products_Collection foreign key (Collection_ID) references Collection(CollectionID)
 --ON UPDATE CASCADE
 --ON DELETE SET NULL;
+Use SoleiletSoie
 ALTER TABLE Users
 ALTER COLUMN Password VARCHAR(300);
 
@@ -197,15 +198,16 @@ ADD CONSTRAINT FK_Design_Collection foreign key (Collection_ID) references Colle
 ON UPDATE no action
 ON DELETE no action;
 
-ALTER TABLE Designs
-ADD Category_ID INT;
+--ALTER TABLE Designs
+--ADD Category_ID INT;
 
-ALTER TABLE Designs
-ADD CONSTRAINT FK_Design_category foreign key (Category_ID) references Category(CategoryID)
-ON UPDATE no action
-ON DELETE no action;
+--ALTER TABLE Designs
+--ADD CONSTRAINT FK_Design_category foreign key (Category_ID) references Category(CategoryID)
+--ON UPDATE no action
+--ON DELETE no action;
 
 ALTER TABLE Designs
 ADD Material_Quantity INT;
 
+Use SoleiletSoie
 UPDATE Users SET Password='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' WHERE UserName='Soleil Et Soie'; --changing main admin pass to hashed version
