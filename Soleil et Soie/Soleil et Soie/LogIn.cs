@@ -34,18 +34,27 @@ namespace Soleil_et_Soie
             }
             else
             {
-                if (type == "user")
+                int result = controllerObj.LoggedIn(textBoxUserName.Text);
+                if(result == 0)
                 {
-                    userhomepage = new UserHomePage(textBoxUserName.Text);
-                    userhomepage.Show();
+                    MessageBox.Show("Couldn't Log In! Please Contact Our Customer Support!");
                 }
-                else if (type == "admin")
+                else
                 {
-                    //this is just for testing
-                    MessageBox.Show("You are an admin");
-                    adminFunctionalities f = new adminFunctionalities();
-                    f.Show();
-                }
+                    MessageBox.Show("Logged In Successfully!");
+                    if (type == "user")
+                    {
+                        userhomepage = new UserHomePage(textBoxUserName.Text);
+                        userhomepage.Show();
+                    }
+                    else if (type == "admin")
+                    {
+                        //this is just for testing
+                        MessageBox.Show("You are an admin");
+                        adminFunctionalities f = new adminFunctionalities();
+                        f.Show();
+                    }
+                }   
             }
         }
 
