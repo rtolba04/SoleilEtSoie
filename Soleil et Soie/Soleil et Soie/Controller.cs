@@ -20,7 +20,9 @@ namespace Soleil_et_Soie
             dbMan.CloseConnection();
         }
 
-        public bool GetLogin(string username, string password) {
+        public bool GetLogin(string username, string password,ref string type) {
+            string typequery = "SELECT UserType FROM Users WHERE UserName ='" +username +"';";
+            type = dbMan.ExecuteScalar(typequery).ToString();
             string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" +username +"' AND Password ='" +password+"';";
             int result = (int)dbMan.ExecuteScalar(query);
             return result == 1;
