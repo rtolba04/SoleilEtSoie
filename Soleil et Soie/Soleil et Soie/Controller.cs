@@ -22,18 +22,22 @@ namespace Soleil_et_Soie
 
         public bool GetLogin(string username, string password,ref string type) {
             string typequery = "SELECT UserType FROM Users WHERE UserName ='" +username +"';";
-            type = dbMan.ExecuteScalar(typequery).ToString();
             string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" +username +"' AND Password ='" +password+"';";
             int result = (int)dbMan.ExecuteScalar(query);
-            return result == 1;
+            if (result == 1)
+            {
+                type = dbMan.ExecuteScalar(typequery).ToString();
+                return true;
+            }
+            else return false;
         }
         
-        public int InsertNewUser(string un, string pw, int pn, string e, string g, string dc)
+        public int InsertNewUser(string un, string pw, long pn, string e, string g, string dc)
         {
             string query;
             if (g == "NULL")
             {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + "'," + e + "'"+dc+"' , 'user' , 'active' );";
+                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + "','" + e + "'"+dc+"' , 'user' , 'active' );";
             }
             else {
                 query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','"+dc+"', 'user', 'active', '"+g+"');";

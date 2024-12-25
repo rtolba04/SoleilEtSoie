@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Security.Cryptography;
 
 namespace Soleil_et_Soie
 {
@@ -21,13 +22,21 @@ namespace Soleil_et_Soie
             controllerObj = new Controller();
         }
 
+        public static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
             int num;
-            int num2;
+            long num2;
             string username;
             string password;
-            int phonenumber;
+            long phonenumber;
             string email;
             string gender;
             if (int.TryParse(textBoxUserName.Text, out num))
@@ -60,7 +69,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError3.Visible = true;
             }
-            else if (!(int.TryParse(textBoxPhone.Text, out num2)))
+            else if (!(long.TryParse(textBoxPhone.Text, out num2)))
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -103,6 +112,7 @@ namespace Soleil_et_Soie
             {
                 username = textBoxUserName.Text;
                 password = textBoxPassword.Text;
+                string hashedpass=HashPassword(password);
                 phonenumber = num2;
                 email = textBoxEmail.Text;
                 if (radioButtonf.Checked == true) { gender = "female"; } 
@@ -111,7 +121,7 @@ namespace Soleil_et_Soie
                 
                 DateTime time = DateTime.Now;
                 string datecreated = time.ToString("yyyy-MM-dd");
-                int result = controllerObj.InsertNewUser(username, password, phonenumber, email, gender , datecreated);
+                int result = controllerObj.InsertNewUser(username, hashedpass, phonenumber, email, gender , datecreated);
                 
                 if (result == 0)
                 {
