@@ -13,9 +13,17 @@ namespace Soleil_et_Soie
 {
     public partial class admin_create_update_users : Form
     {
+        Controller controllerObj;
         public admin_create_update_users()
         {
             InitializeComponent();
+            controllerObj = new Controller();
+            error1.Visible = false;
+            error2.Visible = false;
+            error3.Visible = false;
+            error4.Visible = false;
+            error5.Visible = false;
+            error6.Visible = false;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -104,10 +112,21 @@ namespace Soleil_et_Soie
                 else
                     usertype = "designer";
 
-
-
+                int result = controllerObj.createuser(username, password, phone, email, gender, usertype, datecreated);
+                if (result == 0)
+                {
+                    MessageBox.Show("The creation of a new user failed");
+                }
+                else
+                {
+                    MessageBox.Show("The user is created and inserted successfully!");
+                };
             }
 
+
+
         }
+
+        
     }
 }

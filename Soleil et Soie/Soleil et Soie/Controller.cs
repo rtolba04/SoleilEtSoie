@@ -44,15 +44,21 @@ namespace Soleil_et_Soie
         public int createuser(string un,string pw,int pn,string e,string g,string ut, string dc)
         {
             string query;
-            if (g == "NULL")
+            if (g != "NULL")
             {
-                
+                query = $"insert into Users(UserName,Password,PhoneNumber,Email,DateCreated,UserType,Status,Gender) values('{un}','{pw}',{pn},'{e}','{dc}','{ut}','active','{g}');";
             }
             else
             {
-                
+                query = $"insert into Users(UserName,Password,PhoneNumber,Email,DateCreated,UserType,Status) values('{un}','{pw}',{pn},'{e}','{dc}','{ut}','active');";
             }
             return dbMan.ExecuteNonQuery(query);
+        }
+
+        public DataTable getusers()
+        {
+            string query = $"select * from Users;";
+            return dbMan.ExecuteReader(query);
         }
 
 
