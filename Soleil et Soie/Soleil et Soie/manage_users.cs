@@ -27,7 +27,9 @@ namespace Soleil_et_Soie
 
         private void view_pending_button_Click(object sender, EventArgs e)
         {
-            DataTable dt = controller
+            DataTable dt = controllerObj.getPending();
+            view_pending_dg.DataSource = dt;
+            view_pending_dg.Refresh();
         }
     }
 }
