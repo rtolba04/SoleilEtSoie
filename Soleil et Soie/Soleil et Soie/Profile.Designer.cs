@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.buttonChangePhoto = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,10 +60,12 @@
             // 
             // pictureBoxProfile
             // 
+            this.pictureBoxProfile.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxProfile.Image")));
             this.pictureBoxProfile.Location = new System.Drawing.Point(40, 102);
             this.pictureBoxProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBoxProfile.Name = "pictureBoxProfile";
             this.pictureBoxProfile.Size = new System.Drawing.Size(173, 187);
+            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxProfile.TabIndex = 0;
             this.pictureBoxProfile.TabStop = false;
             // 
@@ -336,6 +339,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Profile";
             this.Text = "Profile";
+            this.Load += new System.EventHandler(this.Profile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

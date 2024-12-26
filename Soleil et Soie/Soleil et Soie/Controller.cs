@@ -93,13 +93,18 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
-
-        public int InsertImage(byte[] imagebytes)
+        //takes byte array, converts it to hexstring, inserts it into db
+        public int ChangeProfile(string username,byte[] imagebytes)
         {
             string hexString = BitConverter.ToString(imagebytes).Replace("-", "");
-            string query = "UPDATE Designs SET DesignImage= 0x"+hexString+ " WHERE Designer_ID=16;";
+            string query = "UPDATE Users SET ProfilePicture= 0x"+hexString+ " WHERE UserName='"+username+"';";
             return dbMan.ExecuteNonQuery(query);
 
+        }
+        //retrieves bytearray from db
+        public void ProfilePicture(string username,ref byte[] imgbytes) {
+            string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
+            imgbytes = (byte[])dbMan.ExecuteScalar(query);
         }
     }
 }
