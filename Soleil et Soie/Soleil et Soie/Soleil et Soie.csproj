@@ -60,18 +60,12 @@
     </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
-    <Compile Include="desediting.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="desediting.cs" />
     <Compile Include="desediting.Designer.cs">
       <DependentUpon>desediting.cs</DependentUpon>
     </Compile>
-    <Compile Include="designer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="designerhome.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="designer.cs" />
+    <Compile Include="designerhome.cs" />
     <Compile Include="designerhome.Designer.cs">
       <DependentUpon>designerhome.cs</DependentUpon>
     </Compile>
