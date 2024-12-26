@@ -20,13 +20,26 @@ namespace Soleil_et_Soie
             controllerObj = new Controller();
         }
 
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            bool exists = controllerObj.GetLogin(textBoxUserName.Text, textBoxPass.Text);
-            if (!exists) {
+            string type = "";
+            bool exists = controllerObj.GetLogin(textBoxUserName.Text, textBoxPass.Text, ref type);
+            if (!exists)
+            {
                 labelError.Visible = true;
             }
+            else if (type == "designer")
+            {
+                int desID = controllerObj.GetUserID(textBoxUserName.Text, textBoxPass.Text);
+                designerhome designerhome = new designerhome( textBoxUserName.Text, desID);
+                designerhome.Show();
+               // designer des = new designer();
+                //des.Show();
+                
+            }
         }
+
 
         private void linkLabelsignin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
