@@ -92,6 +92,15 @@ namespace Soleil_et_Soie
 
             return dbMan.ExecuteNonQuery(query);
         }
+
+
+        public int InsertImage(byte[] imagebytes)
+        {
+            string hexString = BitConverter.ToString(imagebytes).Replace("-", "");
+            string query = "UPDATE Designs SET DesignImage= 0x"+hexString+ " WHERE Designer_ID=16;";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
     }
 }
 

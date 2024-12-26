@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -136,6 +137,43 @@ namespace Soleil_et_Soie
         private void buttonSaveCard_Click(object sender, EventArgs e)
         {
 
+        }
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); // Save the image in PNG format
+                return ms.ToArray();
+            }
+        }
+
+        private void buttonChangePhoto_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", // Filter for image files
+                Title = "Select an Image"
+            };
+
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBoxProfile.Image = Image.FromFile(openFileDialog.FileName);
+                    byte[] imagebytes = ImageToByteArray(pictureBoxProfile.Image);
+                    int insert=controllerObj.InsertImage(imagebytes);
+                    if (insert > 0)
+                    {
+                        MessageBox.Show("Image inserted");
+                    }
+                    else MessageBox.Show("Failed to insert");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image");
+                }
+            }
         }
     }
 }
