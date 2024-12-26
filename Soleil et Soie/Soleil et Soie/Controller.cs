@@ -126,7 +126,11 @@ namespace Soleil_et_Soie
         //retrieves bytearray from db
         public void ProfilePicture(string username,ref byte[] imgbytes) {
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
-            imgbytes = (byte[])dbMan.ExecuteScalar(query);
+            if (dbMan.ExecuteScalar(query) != DBNull.Value)
+            {
+                imgbytes = (byte[])dbMan.ExecuteScalar(query);
+            }
+            else imgbytes= null;
         }
         public DataTable GetProducts()
         {
