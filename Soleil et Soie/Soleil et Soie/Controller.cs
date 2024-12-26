@@ -128,6 +128,18 @@ namespace Soleil_et_Soie
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
             imgbytes = (byte[])dbMan.ExecuteScalar(query);
         }
+        public DataTable GetProducts()
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT P.ProductName, P.Price, D.DesignImage,D.DesignID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY D.DesignID,P.ProductName, P.Price, D.DesignImage;";
+            return dbMan.ExecuteReader(query);
+        }
+        //public int tempinsertdesign(byte[] tempdesign)
+        //{
+        //    string hexString = BitConverter.ToString(tempdesign).Replace("-", "");
+        //    string query = "UPDATE Designs SET DesignImage= 0x" + hexString + " WHERE DesignName='test2';";
+        //    return dbMan.ExecuteNonQuery(query);
+        //}
         //public string autofillsubdate(string design)
         //{
 

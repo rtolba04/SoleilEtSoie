@@ -176,6 +176,7 @@ namespace Soleil_et_Soie
                 {
                     pictureBoxProfile.Image = Image.FromFile(openFileDialog.FileName);
                     byte[] imagebytes = ImageToByteArray(pictureBoxProfile.Image); //turn image to bytearray
+                    //int insert = controllerObj.tempinsertdesign(imagebytes);
                     int insert=controllerObj.ChangeProfile(labelUserName.Text, imagebytes); //call function with byte array
                     if (insert > 0)
                     {

@@ -47,10 +47,14 @@
             this.LogoutButton = new System.Windows.Forms.Button();
             this.UserProfile = new System.Windows.Forms.PictureBox();
             this.UsernameLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.SortLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.ProductsLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.NavBarlayout.SuspendLayout();
             this.CategLayout.SuspendLayout();
             this.CollectionsLayOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserProfile)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // NavBarlayout
@@ -245,9 +249,10 @@
             // UserProfile
             // 
             this.UserProfile.BackColor = System.Drawing.Color.LavenderBlush;
+            this.UserProfile.Dock = System.Windows.Forms.DockStyle.Top;
             this.UserProfile.ErrorImage = null;
             this.UserProfile.Image = ((System.Drawing.Image)(resources.GetObject("UserProfile.Image")));
-            this.UserProfile.Location = new System.Drawing.Point(717, 12);
+            this.UserProfile.Location = new System.Drawing.Point(3, 2);
             this.UserProfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.UserProfile.Name = "UserProfile";
             this.UserProfile.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -260,7 +265,8 @@
             // UsernameLabel
             // 
             this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Location = new System.Drawing.Point(716, 78);
+            this.UsernameLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UsernameLabel.Location = new System.Drawing.Point(3, 66);
             this.UsernameLabel.MaximumSize = new System.Drawing.Size(72, 0);
             this.UsernameLabel.MinimumSize = new System.Drawing.Size(72, 0);
             this.UsernameLabel.Name = "UsernameLabel";
@@ -269,14 +275,42 @@
             this.UsernameLabel.Text = "Username";
             this.UsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.UserProfile);
+            this.flowLayoutPanel1.Controls.Add(this.UsernameLabel);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(723, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(77, 540);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // SortLayout
+            // 
+            this.SortLayout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SortLayout.Location = new System.Drawing.Point(163, 0);
+            this.SortLayout.Name = "SortLayout";
+            this.SortLayout.Size = new System.Drawing.Size(560, 64);
+            this.SortLayout.TabIndex = 4;
+            // 
+            // ProductsLayout
+            // 
+            this.ProductsLayout.AutoScroll = true;
+            this.ProductsLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProductsLayout.Location = new System.Drawing.Point(163, 64);
+            this.ProductsLayout.Name = "ProductsLayout";
+            this.ProductsLayout.Size = new System.Drawing.Size(560, 476);
+            this.ProductsLayout.TabIndex = 5;
+            // 
             // UserHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LavenderBlush;
             this.ClientSize = new System.Drawing.Size(800, 540);
-            this.Controls.Add(this.UsernameLabel);
-            this.Controls.Add(this.UserProfile);
+            this.Controls.Add(this.ProductsLayout);
+            this.Controls.Add(this.SortLayout);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.NavBarlayout);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserHomePage";
@@ -286,8 +320,9 @@
             this.CategLayout.ResumeLayout(false);
             this.CollectionsLayOut.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UserProfile)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -311,5 +346,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel SortLayout;
+        private System.Windows.Forms.FlowLayoutPanel ProductsLayout;
     }
 }
