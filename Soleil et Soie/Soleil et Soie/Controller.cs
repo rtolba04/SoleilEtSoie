@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Forms;
+using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net;
 
 namespace Soleil_et_Soie
 {
@@ -37,10 +42,12 @@ namespace Soleil_et_Soie
             string query;
             if (g == "NULL")
             {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + "','" + e + "'"+dc+"' , 'user' , 'active' );";
+                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + " ,'" + e + "','" + dc + "' , 'user' , 'Logged In' );";
+
+;
             }
             else {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','"+dc+"', 'user', 'active', '"+g+"');";
+                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','"+dc+"', 'user', 'Logged In', '"+g+"');";
             }
             return dbMan.ExecuteNonQuery(query);
         }
@@ -57,22 +64,34 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
-        //public int createuser(string un,string pw,int pn,string e,string g,string ut, string dc)
-        //{
-        //    string query;
-        //    if (g == "NULL")
-        //    {
-                
-        //    }
-        //    else
-        //    {
-                
-        //    }
-        //    return dbMan.ExecuteNonQuery(query);
-        //}
+        public DataTable RetrieveUserInfo(string username)
+        {
+            string query = "SELECT * FROM Users WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteReader(query);
+        }
+        public int UpdateUserDetails(string un, int id, string pw, long pn, string a, string e,string dc, string ut, string s, string g)
+        {
+            string query;
+            if (a == "NULL" && g == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + " ,Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "' WHERE UserID =" + id + ";";
 
+            }
+            else if (a == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "',Gender = '" + g + "' WHERE UserID =" + id + ";";
+            }
+            else if (g == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Address = '" + a + "',Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "' WHERE UserID =" + id + ";";
+            }
+            else
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Address = '" + a + "',Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "',Gender = '" + g + "' WHERE UserID =" + id + ";";
+            }
 
-
+            return dbMan.ExecuteNonQuery(query);
+        }
     }
 }
 

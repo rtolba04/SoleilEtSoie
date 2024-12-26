@@ -12,7 +12,7 @@ namespace Soleil_et_Soie
     {
         //TODO: Make Sure to change Connection String to your Database 
 
-        static string DB_Connection_String = @"Data Source=DESKTOP-59GQ678\SQLEXPRESS;Initial Catalog=CompanyDBLab5;Integrated Security=True;Encrypt=False";
+        static string DB_Connection_String = @"Data Source=DESKTOP-59GQ678\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True;Encrypt=False";
         SqlConnection myConnection;
 
         public DBManager()
