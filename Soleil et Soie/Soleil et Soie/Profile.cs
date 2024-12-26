@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -21,7 +22,10 @@ namespace Soleil_et_Soie
             controllerObj = new Controller();
             labelUserName.Text = UserName; //sets label to username taken from previous form (userhomepage)
         }
+        //event to notify userhomepage that profile picture was updated
+        public event Action<byte[]> ProfilePictureUpdated;
 
+        //hashing password
         public static string HashPassword(string password) //hashes password for security
         {
             using (var sha256 = SHA256.Create())
@@ -31,6 +35,23 @@ namespace Soleil_et_Soie
             }
         }
 
+        //fucntion to turn bytearray from db to image
+        private Image ByteArraytoImage(byte[] imagebytes)
+        {
+            using (MemoryStream ms = new MemoryStream(imagebytes))
+            {
+                return Image.FromStream(ms);
+            }
+        }
+        //function to turn image into bytearray to insert into db
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png); 
+                return ms.ToArray();
+            }
+        }
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             string username, password, address, email;
@@ -136,6 +157,48 @@ namespace Soleil_et_Soie
         private void buttonSaveCard_Click(object sender, EventArgs e)
         {
 
+        }
+        
+
+        private void buttonChangePhoto_Click(object sender, EventArgs e)
+        {
+            //opens dialog box to pick picture from file
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp", // Filter for image files
+                Title = "Select an Image"
+            };
+
+            //when user clicks okay in dialog box
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBoxProfile.Image = Image.FromFile(openFileDialog.FileName);
+                    byte[] imagebytes = ImageToByteArray(pictureBoxProfile.Image); //turn image to bytearray
+                    int insert=controllerObj.ChangeProfile(labelUserName.Text, imagebytes); //call function with byte array
+                    if (insert > 0)
+                    {
+                        //if inserted, fire event profilepictureupdated to change the profile picture in userhomepage without closing profile form 
+                        ProfilePictureUpdated?.Invoke(imagebytes);
+                        //MessageBox.Show("Profile picture changed");
+                    }
+                    else MessageBox.Show("Failed to change profile picture");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image");
+                }
+            }
+        }
+
+        //when first loading, retrieve profile picture from db, if it wasnt changed before then its null so it just wont change the current one
+        private void Profile_Load(object sender, EventArgs e)
+        {
+            byte[] imagebytes = new byte[1024];
+            controllerObj.ProfilePicture(labelUserName.Text, ref imagebytes);
+            if (imagebytes != null)
+                pictureBoxProfile.Image = ByteArraytoImage(imagebytes);
         }
     }
 }

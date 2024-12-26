@@ -281,6 +281,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserHomePage";
             this.Text = "Home Page";
+            this.Load += new System.EventHandler(this.UserHomePage_Load);
             this.NavBarlayout.ResumeLayout(false);
             this.CategLayout.ResumeLayout(false);
             this.CollectionsLayOut.ResumeLayout(false);

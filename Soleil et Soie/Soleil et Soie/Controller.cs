@@ -92,6 +92,20 @@ namespace Soleil_et_Soie
 
             return dbMan.ExecuteNonQuery(query);
         }
+
+        //takes byte array, converts it to hexstring, inserts it into db
+        public int ChangeProfile(string username,byte[] imagebytes)
+        {
+            string hexString = BitConverter.ToString(imagebytes).Replace("-", "");
+            string query = "UPDATE Users SET ProfilePicture= 0x"+hexString+ " WHERE UserName='"+username+"';";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
+        //retrieves bytearray from db
+        public void ProfilePicture(string username,ref byte[] imgbytes) {
+            string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
+            imgbytes = (byte[])dbMan.ExecuteScalar(query);
+        }
     }
 }
 
