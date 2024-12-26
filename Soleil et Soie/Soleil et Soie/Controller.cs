@@ -36,7 +36,14 @@ namespace Soleil_et_Soie
             }
             else return false;
         }
-        
+        public int GetUserID(string username, string password)
+        {
+            string query = "SELECT UserID FROM Users WHERE UserName ='" + username + "' AND Password ='" + password + "';";
+            int id=(int)dbMan.ExecuteScalar(query);
+            return id;
+
+        }
+
         public int InsertNewUser(string un, string pw, long pn, string e, string g, string dc)
         {
             string query;
@@ -51,6 +58,23 @@ namespace Soleil_et_Soie
             }
             return dbMan.ExecuteNonQuery(query);
         }
+        public int subDesign(string desname, string subdate, byte[] b, int desID)
+        {
+            string query = $"INSERT INTO Designs(DesignID, DesignName, ApprovalDate, SubmissionDate, DesignImage, ApprovalStatus, Designer_ID) VALUES ('1','" + desname + "','" + subdate + "','" + subdate + "','" + b + "','Pending', '" + desID + "');";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable selectDesign()
+        {
+            string query = "SELECT DesignName FROM Designs;";
+            return dbMan.ExecuteReader(query);
+        }
+        public string autofillcat(string design )
+        {
+            string query = "SELECT Category FROM Category AND Designs WHERE ;";
+            return dbMan.ExecuteReader(query).ToString();
+        }
+        public string autofillcollection(string design)
+        {
 
         public int LoggedIn(string username)
         {
@@ -105,6 +129,14 @@ namespace Soleil_et_Soie
         public void ProfilePicture(string username,ref byte[] imgbytes) {
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
             imgbytes = (byte[])dbMan.ExecuteScalar(query);
+        }
+        public string autofillsubdate(string design)
+        {
+
+        }
+        public string autofillcollection(string design)
+        {
+
         }
     }
 }
