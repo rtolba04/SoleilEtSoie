@@ -73,8 +73,6 @@ namespace Soleil_et_Soie
             string query = "SELECT Category FROM Category AND Designs WHERE ;";
             return dbMan.ExecuteReader(query).ToString();
         }
-        public string autofillcollection(string design)
-        {
 
         public int LoggedIn(string username)
         {
@@ -130,14 +128,16 @@ namespace Soleil_et_Soie
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
             imgbytes = (byte[])dbMan.ExecuteScalar(query);
         }
-        public string autofillsubdate(string design)
-        {
+        //public string autofillsubdate(string design)
+        //{
 
-        }
-        public string autofillcollection(string design)
-        {
+        //}
+        //public string autofillcollection(string design)
+        //{
 
-        }
+        //}
+        //public string autofillcollection(string design)
+        //{ }
     }
 }
 
