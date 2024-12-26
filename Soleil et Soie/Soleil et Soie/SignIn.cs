@@ -16,13 +16,14 @@ namespace Soleil_et_Soie
     public partial class SignIn : Form
     {
         Controller controllerObj;
+        Form userhomepage;
         public SignIn()
         {
             InitializeComponent();
             controllerObj = new Controller();
         }
 
-        public static string HashPassword(string password)
+        public static string HashPassword(string password) //hashes password for security
         {
             using (var sha256 = SHA256.Create())
             {
@@ -39,7 +40,8 @@ namespace Soleil_et_Soie
             long phonenumber;
             string email;
             string gender;
-            if (int.TryParse(textBoxUserName.Text, out num))
+            //validation checks
+            if (int.TryParse(textBoxUserName.Text, out num)) //not digits only
             {
                 labelError2.Visible = false;
                 labelError3.Visible = false;
@@ -49,7 +51,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError1.Visible = true;
             }
-            else if (textBoxUserName.Text == "")
+            else if (textBoxUserName.Text == "") //not null
             {
                 labelError1.Visible = false;
                 labelError3.Visible = false;
@@ -59,7 +61,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError2.Visible = true;
             }
-            else if (textBoxPassword.Text == "")
+            else if (textBoxPassword.Text == "") //not null
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -69,7 +71,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError3.Visible = true;
             }
-            else if (!(long.TryParse(textBoxPhone.Text, out num2)))
+            else if (!(long.TryParse(textBoxPhone.Text, out num2))) //digits only
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -79,7 +81,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError6.Visible = true;
             }
-            else if (textBoxPhone.Text == "")
+            else if (textBoxPhone.Text == "") //not null
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -89,7 +91,7 @@ namespace Soleil_et_Soie
                 labelError7.Visible = false;
                 labelError4.Visible = true;
             }
-            else if (textBoxPhone.Text.Length != 11)
+            else if (textBoxPhone.Text.Length != 11) //had 11 digits (valid phone no.)
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -99,7 +101,7 @@ namespace Soleil_et_Soie
                 labelError6.Visible = false;
                 labelError7.Visible = true;
             }
-            else if (textBoxEmail.Text == "")
+            else if (textBoxEmail.Text == "")//not null
             {
                 labelError1.Visible = false;
                 labelError2.Visible = false;
@@ -110,6 +112,7 @@ namespace Soleil_et_Soie
             }
             else
             {
+                //sets user details for insert query
                 username = textBoxUserName.Text;
                 password = textBoxPassword.Text;
                 string hashedpass=HashPassword(password);
@@ -120,16 +123,18 @@ namespace Soleil_et_Soie
                 else { gender = "NULL"; };
                 
                 DateTime time = DateTime.Now;
-                string datecreated = time.ToString("yyyy-MM-dd");
+                string datecreated = time.ToString("yyyy-MM-dd"); //sets date in correct format for insert query
                 int result = controllerObj.InsertNewUser(username, hashedpass, phonenumber, email, gender , datecreated);
                 
                 if (result == 0)
                 {
-                    MessageBox.Show("The insertion of a new user failed");
+                    MessageBox.Show("Could Not Create User Account! Please Contact Our Customer Support");
                 }
                 else
                 {
-                    MessageBox.Show("The user is inserted successfully!");
+                    MessageBox.Show("Account Created Successfully! Welcome to Soliel et Soie!");
+                    userhomepage = new UserHomePage(username); //opens user home page when user is added to db
+                    userhomepage.Show();
                 };
             }
         }

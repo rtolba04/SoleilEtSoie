@@ -23,7 +23,7 @@ namespace Soleil_et_Soie
             gp.AddEllipse(0, 0, UserProfile.Width, UserProfile.Height);
             UserProfile.Region = new Region(gp);
             UsernameLabel.Text = UserName;
-            userprofile = new Profile();
+            userprofile = new Profile(UserName);
         }
 
         private void CollectionsButton_Click(object sender, EventArgs e)
