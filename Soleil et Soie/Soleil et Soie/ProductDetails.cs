@@ -21,7 +21,8 @@ namespace Soleil_et_Soie
         Image desImg;
         decimal p;
         Cart MyCart;
-        public ProductDetails(ImageInfo info, Cart Cart)
+        Form checkout;
+        public ProductDetails(ImageInfo info, Cart Cart,string username)
         {
             InitializeComponent();
             controllerObj = new Controller();
@@ -39,6 +40,7 @@ namespace Soleil_et_Soie
             unitprice = info.price;
             labelDescription.Text = descrip;
             MyCart = Cart;
+            checkout = new Checkout(MyCart,username);
         }
 
         private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
@@ -67,6 +69,7 @@ namespace Soleil_et_Soie
                 // Add the item to the cart
                 MyCart.AddToCart(designName, quantityordered, image, unitprice);
                 stock -= quantityordered;
+                labelStock.Text = "Only " + stock + " left in Stock! Get yours NOW";
                 int result = controllerObj.TempUpdateStock(stock, desname); //temporarily update stock quantity in database to prevent ordering more than available
 
                 // Notify the user
@@ -80,6 +83,28 @@ namespace Soleil_et_Soie
             {
                 MessageBox.Show("Please select a valid quantity before adding to the cart.");
             }
+        }
+
+        private void buttonOrder_Click(object sender, EventArgs e)
+        {
+            string designName = desname;
+            int quantityordered = (int)numericUpDownQuantity.Value;
+            Image image = desImg;
+            decimal tot_price = p;
+            if (quantityordered > 0 && quantityordered <= stock)
+            {
+                // Add the item to the cart
+                MyCart.AddToCart(designName, quantityordered, image, unitprice);
+                stock -= quantityordered;
+                labelStock.Text = "Only " + stock + " left in Stock! Get yours NOW";
+                int result = controllerObj.TempUpdateStock(stock, desname); //temporarily update stock quantity in database to prevent ordering more than available
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid quantity before adding to the ordering.");
+            }
+            checkout.Show();
         }
     }
 }

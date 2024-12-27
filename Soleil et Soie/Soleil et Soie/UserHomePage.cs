@@ -22,14 +22,18 @@ namespace Soleil_et_Soie
         public UserHomePage(string UserName)
         {
             InitializeComponent();
-            controllerObj = new Controller();
+            if (!DesignMode)
+            {
+                controllerObj = new Controller();
+                UsernameLabel.Text = UserName;
+                userprofile = new Profile(UserName);
+                DisplayImages();
+                MyCart = new Cart(UserName);
+            }
+            
             GraphicsPath gp = new GraphicsPath();
             gp.AddEllipse(0, 0, UserProfile.Width, UserProfile.Height);
             UserProfile.Region = new Region(gp);
-            UsernameLabel.Text = UserName;
-            userprofile = new Profile(UserName);
-            DisplayImages();
-            MyCart = new Cart();
         }
 
         //change bytearray to image
@@ -121,7 +125,7 @@ namespace Soleil_et_Soie
                 //make images clickable to go to details form
                 prodImage.Click += (sender, e) =>
                 {
-                    ProductDetails detailsForm = new ProductDetails(imageInfo, MyCart);
+                    ProductDetails detailsForm = new ProductDetails(imageInfo, MyCart,UsernameLabel.Text);
                     detailsForm.Show();
                 };
 
@@ -238,6 +242,17 @@ namespace Soleil_et_Soie
             { 
                 MyCart.Show();
             };
+        }
+
+        private void UserHomePage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //return products to db if user clicked out of form
+            foreach (CartItem product in MyCart.items)
+            {
+                string name = product.Name;
+                int quantity = product.Quantity;
+                controllerObj.ReturnProduct(name, quantity);
+            }
         }
     }
     //class to hold imageinfo retrieved from db

@@ -164,6 +164,26 @@ namespace Soleil_et_Soie
             string query = "UPDATE Products SET StockQuantity = " + quantity + " WHERE ProductName = '" + prod + "';";
             return dbMan.ExecuteNonQuery(query);
         }
+
+        public void ReturnProduct(string name,int quan)
+        {
+            string query = "UPDATE Products SET StockQuantity=StockQuantity+" + quan + "WHERE ProductName='" + name + "';";
+            dbMan.ExecuteNonQuery(query);
+        }
+        public int GetUserNoPass(string username)
+        {
+            string query = "SELECT UserID FROM Users WHERE UserName='" + username + "';";
+            if (dbMan.ExecuteScalar(query) != null)
+            {
+                return (int)dbMan.ExecuteScalar(query);
+            }
+            else return -1;
+        }
+        public DataTable GetCards(int ID)
+        {
+            string query = "SELECT EndsIn FROM CardDetails WHERE User_ID=" + ID + ";";
+            return dbMan.ExecuteReader(query);
+        }
         //public int tempinsertdesign(byte[] tempdesign)
         //{
         //    string hexString = BitConverter.ToString(tempdesign).Replace("-", "");

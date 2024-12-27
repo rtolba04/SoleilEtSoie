@@ -58,11 +58,23 @@
     <Compile Include="admin_create_update_users.Designer.cs">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="CardDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CardDetails.Designer.cs">
+      <DependentUpon>CardDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cart.Designer.cs">
       <DependentUpon>Cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Checkout.Designer.cs">
+      <DependentUpon>Checkout.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
@@ -119,8 +131,14 @@
     <EmbeddedResource Include="admin_create_update_users.resx">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CardDetails.resx">
+      <DependentUpon>CardDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cart.resx">
       <DependentUpon>Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Checkout.resx">
+      <DependentUpon>Checkout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="desediting.resx">
       <DependentUpon>desediting.cs</DependentUpon>

@@ -12,11 +12,14 @@ namespace Soleil_et_Soie
 {
     public partial class Cart : Form
     {
-        private List<CartItem> items; // A list to hold cart items
-        public Cart()
+        Form checkout;
+        string Username;
+        public List<CartItem> items; // A list to hold cart items //public so it can be accessed in UserHomePage
+        public Cart(string username)
         {
             InitializeComponent();
             items = new List<CartItem>();
+            Username = username;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -75,12 +78,18 @@ namespace Soleil_et_Soie
                 flowLayoutPanelCart.Controls.Add(itemPanel);
             }
         }
-        public class CartItem
+
+        private void buttonCheckOut_Click(object sender, EventArgs e)
         {
-            public string Name { get; set; }
-            public int Quantity { get; set; }
-            public Image Image { get; set; }
-            public decimal Price { get; set; }
+            checkout = new Checkout(this,Username);
+            checkout.Show();
         }
+    }
+    public class CartItem
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public Image Image { get; set; }
+        public decimal Price { get; set; }
     }
 }
