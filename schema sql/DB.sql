@@ -223,3 +223,8 @@ INSERT INTO Designs(DesignName,ApprovalDate,SubmissionDate,ApprovalStatus,Design
 INSERT INTO Products(ProductName,DateAdded,StockQuantity,Price,Description,Status,Category_ID,Design_ID) VALUES 
 ('dress1','2024/12/26',20,500,'wow so dress','approved',1,3),
 ('dress2','2024/12/26',30,1000,'wow so dress','approved',1,4);
+
+INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','"+dc+"', 'user', 'Logged In', '"+g+"');
+
+Use SoleiletSoie
+INSERT INTO Orders VALUES (1009,'User', '2024/12/12','Out For Delivery','3000','wtv','2024/12/14')

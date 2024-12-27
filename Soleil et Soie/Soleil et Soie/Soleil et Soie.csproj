@@ -58,6 +58,12 @@
     <Compile Include="admin_create_update_users.Designer.cs">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cart.Designer.cs">
+      <DependentUpon>Cart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="desediting.cs" />
@@ -68,6 +74,12 @@
     <Compile Include="designerhome.cs" />
     <Compile Include="designerhome.Designer.cs">
       <DependentUpon>designerhome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductDetails.Designer.cs">
+      <DependentUpon>ProductDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
@@ -107,6 +119,9 @@
     <EmbeddedResource Include="admin_create_update_users.resx">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cart.resx">
+      <DependentUpon>Cart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="desediting.resx">
       <DependentUpon>desediting.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +131,9 @@
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductDetails.resx">
+      <DependentUpon>ProductDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>

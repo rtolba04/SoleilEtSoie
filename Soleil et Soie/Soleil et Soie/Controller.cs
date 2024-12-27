@@ -10,6 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
+using System.Collections;
 
 namespace Soleil_et_Soie
 {
@@ -76,13 +77,13 @@ namespace Soleil_et_Soie
 
         public int LoggedIn(string username)
         {
-            string query = "UPDATE Users SET status = 'logged in' WHERE UserName = '" + username + "';";
+            string query = "UPDATE Users SET status = 'Logged In' WHERE UserName = '" + username + "';";
             return dbMan.ExecuteNonQuery(query);
         }
 
         public int LoggedOut(string username)
         {
-            string query = "UPDATE Users SET status = 'logged out' WHERE UserName = '" + username + "';";
+            string query = "UPDATE Users SET status = 'Logged Out' WHERE UserName = '" + username + "';";
             return dbMan.ExecuteNonQuery(query);
         }
 
@@ -135,8 +136,33 @@ namespace Soleil_et_Soie
         public DataTable GetProducts()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT P.ProductName, P.Price, D.DesignImage,D.DesignID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY D.DesignID,P.ProductName, P.Price, D.DesignImage;";
+            string query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
             return dbMan.ExecuteReader(query);
+        }
+
+        public DataTable RetrieveAllDesData(int id)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT StockQuantity, Description FROM Products WHERE ProductID =" +id+ ";";
+            return dbMan.ExecuteReader(query) ;
+        } 
+
+        public DataTable GetOrderHistory(string un)
+        {
+            string query="SELECT P.ProductName, O.OrderDate, O.Status, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" +un+ "';";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public DataTable GetPendingOrders(string un)
+        {
+            string query = "SELECT P.ProductName, O.OrderDate, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" + un + "' AND O.Status= 'Out For Delivery' ;";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public int TempUpdateStock(int quantity, string prod)
+        {
+            string query = "UPDATE Products SET StockQuantity = " + quantity + " WHERE ProductName = '" + prod + "';";
+            return dbMan.ExecuteNonQuery(query);
         }
         //public int tempinsertdesign(byte[] tempdesign)
         //{
