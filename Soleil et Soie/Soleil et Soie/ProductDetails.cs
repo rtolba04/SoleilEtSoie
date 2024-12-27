@@ -62,7 +62,7 @@ namespace Soleil_et_Soie
             int quantityordered = (int)numericUpDownQuantity.Value;
             Image image= desImg;
             decimal tot_price = p;
-            MyCart.Show();
+            //MyCart.Show();
 
             if (quantityordered>0 && quantityordered<=stock)
             {

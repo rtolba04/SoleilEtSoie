@@ -16,8 +16,9 @@ namespace Soleil_et_Soie
         int userid;
         string userName;
         Cart checkoutcart;
-        CardDetails cardpanel;
         Controller controllerObj;
+        string chosencard;
+        string address;
         public Checkout(Cart cart,string username)
         {
             InitializeComponent();
@@ -26,6 +27,11 @@ namespace Soleil_et_Soie
             checkoutcart = cart;
             userName= username;
             totalamount=0;
+            address = controllerObj.GetAddress(username);
+            if (address != null) 
+            {
+                textBoxAddress.Text = address;
+            }
         }
 
         private void Checkout_Load(object sender, EventArgs e)
@@ -77,18 +83,104 @@ namespace Soleil_et_Soie
             {
                 if (radioButtonCard.Checked)
                 {
-                    cardpanel= new CardDetails(userid);
-                    cardpanel.Dock = DockStyle.Fill;
-                    cardpanel.AutoSize = true;
                     flowLayoutCard.Controls.Clear();
-                    flowLayoutCard.Controls.Add(cardpanel);
+                    DataTable cards = new DataTable();
+                    cards = controllerObj.GetCards(userid);
+                    if (cards != null)
+                    {
+                        foreach (DataRow row in cards.Rows)
+                        {
+                            FlowLayoutPanel card = new FlowLayoutPanel();
+                            card.Size = new Size(100, 100);
+                            card.FlowDirection = FlowDirection.LeftToRight;
+                            card.AutoSize = true;
+                            card.Dock = DockStyle.Top;
+
+                            Label id = new Label();
+                            id.Visible = false;
+                            id.Size = new Size(1,1);
+
+                            RadioButton pickcard = new RadioButton();
+                            pickcard.Text = "Card ends in " +row["EndsIn"].ToString();
+                            pickcard.Margin = new Padding(10);
+                            pickcard.AutoSize = true;
+
+                            id.Text = row["CardNumber"].ToString();
+
+                            card.Controls.Add(pickcard);
+                            card.Controls.Add(id);
+
+                            pickcard.CheckedChanged += (senders, ev) =>
+                            {
+                                if (pickcard.Checked) 
+                                {
+                                // Uncheck all other RadioButtons manually
+                                foreach (RadioButton rb in flowLayoutCard.Controls
+                                             .OfType<FlowLayoutPanel>()
+                                             .SelectMany(p => p.Controls.OfType<RadioButton>()))
+                                    {
+                                        if (rb != pickcard)
+                                        {
+                                            rb.Checked = false;
+                                        }
+                                    }
+
+                                    // Update button visibility and chosencard
+                                    buttonFinishOrder.Visible = true;
+                                    chosencard = id.Text;
+                                }
+                            };
+
+                            flowLayoutCard.Controls.Add(card);
+                        }
+                    }
+                    else
+                    {
+                        FlowLayoutPanel details = new FlowLayoutPanel();
+                        details.Size = new Size(100, 100);
+                        details.FlowDirection = FlowDirection.LeftToRight;
+                        details.AutoSize = true;
+                        details.Dock = DockStyle.Top;
+
+                        Label holdername = new Label();
+                        holdername.Text = "Cardholder name: ";
+                        holdername.AutoSize = true;
+                        holdername.Margin= new Padding(10);
+
+                        Label cardnum = new Label();
+                        cardnum.Text = "Card Number: ";
+                        cardnum.AutoSize = true;
+                        cardnum.Margin= new Padding(10);
+
+                        Label cvv = new Label();
+                        cvv.Text = "CVV: ";
+                        cvv.AutoSize = true;
+                        cvv.Margin = new Padding(10);
+
+                        Label ExpDate = new Label();
+                        ExpDate.Text = "Expiry Date: ";
+                        ExpDate.AutoSize = true;
+                        ExpDate.Margin = new Padding(10);
+
+                        details.Controls.Add(holdername);
+                        details.Controls.Add(cardnum);
+                        details.Controls.Add(cvv);
+                        details.Controls.Add(ExpDate);
+
+                        flowLayoutCard.Controls.Add(details);
+                    }
+                    if (flowLayoutCard.Visible == false)
+                    {
+                        flowLayoutCard.Visible = true;
+                    }
+                    flowLayoutCard.PerformLayout();
                     flowLayoutCard.Refresh();
                 }
                 else
                 {
-                    if (cardpanel.Visible == true)
+                    if (flowLayoutCard.Visible == true)
                     {
-                        cardpanel.Hide();
+                        flowLayoutCard.Hide();
                     }
                 }
             }

@@ -44,53 +44,61 @@
             this.flowLayoutItems.AutoScroll = true;
             this.flowLayoutItems.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutItems.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutItems.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.flowLayoutItems.Name = "flowLayoutItems";
-            this.flowLayoutItems.Size = new System.Drawing.Size(410, 450);
+            this.flowLayoutItems.Size = new System.Drawing.Size(308, 366);
             this.flowLayoutItems.TabIndex = 0;
             // 
             // flowLayoutCard
             // 
+            this.flowLayoutCard.AutoScroll = true;
             this.flowLayoutCard.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutCard.Location = new System.Drawing.Point(410, 257);
+            this.flowLayoutCard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutCard.Location = new System.Drawing.Point(308, 209);
+            this.flowLayoutCard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.flowLayoutCard.Name = "flowLayoutCard";
-            this.flowLayoutCard.Size = new System.Drawing.Size(390, 193);
+            this.flowLayoutCard.Size = new System.Drawing.Size(292, 157);
             this.flowLayoutCard.TabIndex = 1;
             // 
             // buttonFinishOrder
             // 
             this.buttonFinishOrder.AutoSize = true;
-            this.buttonFinishOrder.Location = new System.Drawing.Point(684, 225);
+            this.buttonFinishOrder.Location = new System.Drawing.Point(504, 182);
+            this.buttonFinishOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonFinishOrder.Name = "buttonFinishOrder";
-            this.buttonFinishOrder.Size = new System.Drawing.Size(89, 26);
+            this.buttonFinishOrder.Size = new System.Drawing.Size(74, 23);
             this.buttonFinishOrder.TabIndex = 2;
-            this.buttonFinishOrder.Text = "Finish Order";
+            this.buttonFinishOrder.Text = "Order Now!!";
             this.buttonFinishOrder.UseVisualStyleBackColor = true;
             this.buttonFinishOrder.Visible = false;
             // 
             // labelTotal
             // 
             this.labelTotal.AutoSize = true;
-            this.labelTotal.Location = new System.Drawing.Point(456, 230);
+            this.labelTotal.Location = new System.Drawing.Point(312, 187);
+            this.labelTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(98, 16);
+            this.labelTotal.Size = new System.Drawing.Size(79, 13);
             this.labelTotal.TabIndex = 3;
             this.labelTotal.Text = "Total amount is";
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(456, 70);
+            this.labelAddress.Location = new System.Drawing.Point(312, 52);
+            this.labelAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAddress.Name = "labelAddress";
-            this.labelAddress.Size = new System.Drawing.Size(58, 16);
+            this.labelAddress.Size = new System.Drawing.Size(45, 13);
             this.labelAddress.TabIndex = 4;
             this.labelAddress.Text = "Address";
             // 
             // radioButtonCard
             // 
             this.radioButtonCard.AutoSize = true;
-            this.radioButtonCard.Location = new System.Drawing.Point(503, 169);
+            this.radioButtonCard.Location = new System.Drawing.Point(352, 136);
+            this.radioButtonCard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButtonCard.Name = "radioButtonCard";
-            this.radioButtonCard.Size = new System.Drawing.Size(57, 20);
+            this.radioButtonCard.Size = new System.Drawing.Size(47, 17);
             this.radioButtonCard.TabIndex = 5;
             this.radioButtonCard.TabStop = true;
             this.radioButtonCard.Text = "Card";
@@ -100,9 +108,10 @@
             // radioButtonCash
             // 
             this.radioButtonCash.AutoSize = true;
-            this.radioButtonCash.Location = new System.Drawing.Point(684, 168);
+            this.radioButtonCash.Location = new System.Drawing.Point(488, 136);
+            this.radioButtonCash.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButtonCash.Name = "radioButtonCash";
-            this.radioButtonCash.Size = new System.Drawing.Size(59, 20);
+            this.radioButtonCash.Size = new System.Drawing.Size(49, 17);
             this.radioButtonCash.TabIndex = 6;
             this.radioButtonCash.TabStop = true;
             this.radioButtonCash.Text = "Cash";
@@ -111,25 +120,27 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(456, 116);
+            this.label3.Location = new System.Drawing.Point(312, 94);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 16);
+            this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Payment Method";
             // 
             // textBoxAddress
             // 
-            this.textBoxAddress.Location = new System.Drawing.Point(524, 64);
+            this.textBoxAddress.Location = new System.Drawing.Point(377, 52);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(219, 22);
+            this.textBoxAddress.Size = new System.Drawing.Size(201, 20);
             this.textBoxAddress.TabIndex = 8;
             // 
             // Checkout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LavenderBlush;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.radioButtonCash);
@@ -139,6 +150,7 @@
             this.Controls.Add(this.buttonFinishOrder);
             this.Controls.Add(this.flowLayoutCard);
             this.Controls.Add(this.flowLayoutItems);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Checkout";
             this.Text = "Checkout";
             this.Load += new System.EventHandler(this.Checkout_Load);

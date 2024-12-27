@@ -179,9 +179,15 @@ namespace Soleil_et_Soie
             }
             else return -1;
         }
+
+        public string GetAddress(string username)
+        {
+            string query = "SELECT Address FROM Users WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteScalar(query).ToString();
+        }
         public DataTable GetCards(int ID)
         {
-            string query = "SELECT EndsIn FROM CardDetails WHERE User_ID=" + ID + ";";
+            string query = "SELECT EndsIn, CardNumber FROM CardDetails WHERE User_ID=" + ID + ";";
             return dbMan.ExecuteReader(query);
         }
         //public int tempinsertdesign(byte[] tempdesign)
