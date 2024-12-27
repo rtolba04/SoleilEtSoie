@@ -11,6 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
 using System.Collections;
+using System.Runtime.Remoting.Messaging;
 
 namespace Soleil_et_Soie
 {
@@ -189,6 +190,12 @@ namespace Soleil_et_Soie
         {
             string query = "SELECT EndsIn, CardNumber FROM CardDetails WHERE User_ID=" + ID + ";";
             return dbMan.ExecuteReader(query);
+        }
+
+        public bool SaveCardDetails(int userid,string holder,string hashnum,string hashcvv,int YEAR,int MONTH,int EndsIn)
+        {
+            string query = "INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES(" + userid + ",'" + holder + "','" + hashnum + "','" + hashcvv + "','" + YEAR + "/" + MONTH + "/31'," + EndsIn + ");";
+            return ((dbMan.ExecuteNonQuery(query) > 0));
         }
         //public int tempinsertdesign(byte[] tempdesign)
         //{
