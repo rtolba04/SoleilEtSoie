@@ -1,28 +1,28 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
-//using System.Drawing;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Windows.Forms;
+﻿//using system;
+//using system.collections.generic;
+//using system.componentmodel;
+//using system.data;
+//using system.drawing;
+//using system.linq;
+//using system.text;
+//using system.threading.tasks;
+//using system.windows.forms;
 
-//namespace Soleil_et_Soie
+//namespace soleil_et_soie
 //{
-//    public partial class desediting : Form
+//    public partial class desediting : form
 //    {
-//        Controller controllerObj;
+//        controller controllerobj;
 //        public desediting()
 //        {
-//            InitializeComponent();
-//            DataTable dt = controllerObj.selectDesign();
-//            desnamecombobox.DataSource = dt;
-//            desnamecombobox.DisplayMember = "DesignName";
+//            initializecomponent();
+//            datatable dt = controllerobj.selectdesign();
+//            desnamecombobox.datasource = dt;
+//            desnamecombobox.displaymember = "designname";
 //            category = autofillcat
 //        }
 
-//        private void button1_Click(object sender, EventArgs e)
+//        private void button1_click(object sender, eventargs e)
 //        {
 
 //        }

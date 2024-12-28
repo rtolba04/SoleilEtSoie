@@ -58,7 +58,25 @@
     <Compile Include="admin_create_update_users.Designer.cs">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="collectionHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="collectionHome.Designer.cs">
+      <DependentUpon>collectionHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
+    <Compile Include="createcolection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="createcolection.Designer.cs">
+      <DependentUpon>createcolection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="createdesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="createdesign.Designer.cs">
+      <DependentUpon>createdesign.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBManager.cs" />
     <Compile Include="desediting.cs" />
     <Compile Include="desediting.Designer.cs">
@@ -69,11 +87,41 @@
     <Compile Include="designerhome.Designer.cs">
       <DependentUpon>designerhome.cs</DependentUpon>
     </Compile>
+    <Compile Include="designerhomepage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designerhomepage.Designer.cs">
+      <DependentUpon>designerhomepage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designstatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designstatus.Designer.cs">
+      <DependentUpon>designstatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editdesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editdesign.Designer.cs">
+      <DependentUpon>editdesign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="saletrends.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="saletrends.Designer.cs">
+      <DependentUpon>saletrends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="subcollection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="subcollection.Designer.cs">
+      <DependentUpon>subcollection.cs</DependentUpon>
     </Compile>
     <Compile Include="UserHomePage.cs">
       <SubType>Form</SubType>
@@ -107,11 +155,32 @@
     <EmbeddedResource Include="admin_create_update_users.resx">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="collectionHome.resx">
+      <DependentUpon>collectionHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="createcolection.resx">
+      <DependentUpon>createcolection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="createdesign.resx">
+      <DependentUpon>createdesign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="desediting.resx">
       <DependentUpon>desediting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="designer.resx">
+      <DependentUpon>designer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="designerhome.resx">
       <DependentUpon>designerhome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designerhomepage.resx">
+      <DependentUpon>designerhomepage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designstatus.resx">
+      <DependentUpon>designstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editdesign.resx">
+      <DependentUpon>editdesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
@@ -132,8 +201,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="saletrends.resx">
+      <DependentUpon>saletrends.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="subcollection.resx">
+      <DependentUpon>subcollection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserHomePage.resx">
       <DependentUpon>UserHomePage.cs</DependentUpon>

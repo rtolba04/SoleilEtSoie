@@ -10,6 +10,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace Soleil_et_Soie
 {
@@ -25,7 +27,7 @@ namespace Soleil_et_Soie
             dbMan.CloseConnection();
         }
 
-        public bool GetLogin(string username, string password,ref string type) {
+        public bool GetLogin(string username, string password, ref string type) {
             string typequery = "SELECT UserType FROM Users WHERE UserName ='" +username +"';";
             string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" +username +"' AND Password ='" +password+"';";
             int result = (int)dbMan.ExecuteScalar(query);
@@ -70,9 +72,46 @@ namespace Soleil_et_Soie
         }
         public string autofillcat(string design )
         {
-            string query = "SELECT Category FROM Category AND Designs WHERE ;";
-            return dbMan.ExecuteReader(query).ToString();
+            string query = "SELECT Category FROM Category AND Designs WHERE Category(CategoryID)=Designs(DesignCategory_ID) AND Designs(DesignName)= '"+design+"' ;";
+            return dbMan.ExecuteScalar(query).ToString();
         }
+        public string autofilldescription(string design)
+        {
+            string query = "SELECT Description FROM Designs WHERE Designs(DesignName)= '" + design + "' ;";
+            return dbMan.ExecuteScalar(query).ToString();
+        }
+        public string autofillmats(string design)
+        {
+            string query = "SELECT Material_Quantity FROM Designs WHERE Designs(DesignName)= '" + design + "' ;";
+            return dbMan.ExecuteScalar(query).ToString();
+        }
+        public string autofilldesign(string design)
+        {
+            string query = "SELECT DesignImage FROM Designs WHERE Designs(DesignName)= '" + design + "' ;";
+            return dbMan.ExecuteScalar(query).ToString();
+        }
+        //public byte[] GetDesignImage(string desname)
+        //{
+        //    string query = $"SELECT DesignImage FROM Designs WHERE DesignName = {desname}";
+
+        //    // Use ExecuteScalar to fetch the single value
+        //    object result = dbMan.ExecuteScalar(query);
+
+        //    // Check if the result is not null in the database(dbnull.value) and return it as byte[]
+        //   // return result != DBNull.Value ? (byte[])result : null;
+        //}
+        public Image ByteArraytoImage(byte[] imagebytes)
+        {
+            using (MemoryStream ms = new MemoryStream(imagebytes))
+            {
+                return Image.FromStream(ms);
+            }
+        }
+        //public int getdesignID(string desname)
+        //{
+        //    string query = "SELECT DesignID FROM Designs(DesignName)= '" + desname + "' ;";
+
+        //}
 
         public int LoggedIn(string username)
         {
@@ -128,6 +167,92 @@ namespace Soleil_et_Soie
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
             imgbytes = (byte[])dbMan.ExecuteScalar(query);
         }
+
+        public int getcatid(string cat)
+        {
+            string query = "SELECT CategoryID FROM Category WHERE CategoryName='" + cat + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int getmaterialid(string cat)
+        {
+            string query = "SELECT CategoryID FROM Category WHERE CategoryName='" + cat + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        public int submitDesign(string name, string cat, int desid, string sdate)
+        {
+            string query = "INSERT INTO Designs (DesignName, ApprovalDate, ApprovalStatus, Designer_ID, SubmissionDate)  VALUES ('"+ name+"', '"+sdate+"', 'Pending', '"+desid+"', '"+sdate+"');";
+            return (int)dbMan.ExecuteNonQuery(query);
+        }
+        public int submitDesignPic(string desname, byte[] imgbytes)
+        {
+
+            string hexString = BitConverter.ToString(imgbytes).Replace("-", "");
+            string query = "UPDATE Designs SET DesignImage= 0x" + hexString + " WHERE DesignName='" + desname + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        public int deleteunapproved()
+        {
+            string query = "DELETE FROM Designs WHERE ApprovalStatus='Rejected';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable getallDesigns() {
+            string query = "SELECT DesignID, DesignName, ApprovalStatus FROM Designs;";
+            return dbMan.ExecuteReader(query);
+        }
+        public int createCollection(string name, string season, string sdate, string edate, string description)
+        {
+            string query = "INSERT INTO Collections (CollectionName, Season, StartDate, EndDate, Description)  VALUES ('" + name + "', '" + season + "', '"+sdate+"','" + edate + "', '" + description + "');";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable selectCollection()
+        {
+            string query = "SELECT CollectionName FROM Collections;";
+            return dbMan.ExecuteReader(query);
+        }
+        public int getCollid(string colname)
+        {
+            string query = "SELECT CollectionID FROM Collections WHERE CollectionName='"+colname+"';";
+            return (int)dbMan.ExecuteScalar (query);
+        }
+        public int addDesign(string desname, int id)
+        {
+            string query = "UPDATE Designs SET Collection_ID='"+id+"' WHERE DesignName='"+desname+"'' ;";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int removedesfromcol(string desname)
+        {
+            string query = "UPDATE Designs SET Collection_ID=null WHERE DesignName='" + desname + "'' ;";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable getsales()
+        {
+            string query = "SELECT Product_ID, ProductName, Quantity FROM Products AND ProductOrders WHERE Products(ProductID)=ProductOrders(Product_ID) GROUP BY ProductOrders(Product_ID) DESC";
+            return dbMan.ExecuteReader(query);
+        }
+        public int updatedesign(string desname, int cat, string description, string material, int mats)
+        { 
+            string query = "UPDATE Designs SET DesignCategory='" + desname + "', DesignCategory_ID= '"+cat+"', Description='"+description+"', Mat
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //public string autofillsubdate(string design)
         //{
 
