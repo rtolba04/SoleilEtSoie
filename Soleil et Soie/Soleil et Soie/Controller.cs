@@ -197,6 +197,28 @@ namespace Soleil_et_Soie
             string query = "INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES(" + userid + ",'" + holder + "','" + hashnum + "','" + hashcvv + "','" + YEAR + "/" + MONTH + "/31'," + EndsIn + ");";
             return ((dbMan.ExecuteNonQuery(query) > 0));
         }
+
+        public int AddOrder(int userid, string orderdate, decimal totalamount, string address,string deliverydate, ref int orderID)
+        {
+            string query = "INSERT INTO Orders VALUES("+userid+", 'user', '"+orderdate+"','out for delivery',"+totalamount+",'"+address+"','"+deliverydate+"');";
+            int q1result = dbMan.ExecuteNonQuery(query);
+            string query2 = "SELECT OrderID FROM Orders WHERE User_ID = "+userid+" AND UserType = 'user' AND OrderDate = '"+orderdate+"' AND Status= 'out for delivery' AND TotalAmount= "+totalamount+" AND DeliveryAddress = '"+address+"' AND DeliveryDate = '"+deliverydate+"';";
+            if (q1result > 0) {
+                orderID = (int)dbMan.ExecuteScalar(query2);
+            }
+            else { orderID = -1; }
+            return (q1result);
+        }
+
+        public int AddProdOrder(string prodName, int prodQ, int orderID)
+        {
+            string query = "SELECT ProductID FROM Products WHERE ProductName = '" + prodName + "';";
+            int prodID = (int)dbMan.ExecuteScalar(query);
+            string query2 = "INSERT INTO ProductOrders (Product_ID, Order_ID, Quantity)  VALUES(" + prodID + "," + orderID + "," + prodQ + ");";
+            return (int)dbMan.ExecuteNonQuery(query2); 
+        }
+
+    } 
         //public int tempinsertdesign(byte[] tempdesign)
         //{
         //    string hexString = BitConverter.ToString(tempdesign).Replace("-", "");
@@ -214,5 +236,5 @@ namespace Soleil_et_Soie
         //public string autofillcollection(string design)
         //{ }
     }
-}
+
 

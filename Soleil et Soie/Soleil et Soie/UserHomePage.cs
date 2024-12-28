@@ -247,12 +247,16 @@ namespace Soleil_et_Soie
         private void UserHomePage_FormClosed(object sender, FormClosedEventArgs e)
         {
             //return products to db if user clicked out of form
-            foreach (CartItem product in MyCart.items)
+            if (RestockStatus.status == -1)
             {
-                string name = product.Name;
-                int quantity = product.Quantity;
-                controllerObj.ReturnProduct(name, quantity);
+                foreach (CartItem product in MyCart.items)
+                {
+                    string name = product.Name;
+                    int quantity = product.Quantity;
+                    controllerObj.ReturnProduct(name, quantity);
+                }
             }
+
         }
     }
     //class to hold imageinfo retrieved from db
@@ -262,5 +266,10 @@ namespace Soleil_et_Soie
         public string name { get; set; }
         public decimal price { get; set; }
         public int productid { get; set; }
+    }
+
+    public static class  RestockStatus
+    {
+        public static int status = -1;
     }
 }

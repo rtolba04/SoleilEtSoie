@@ -13,12 +13,12 @@ namespace Soleil_et_Soie
 {
     public partial class Checkout : Form
     {
-        int totalamount;
+        decimal totalamount;
         int userid;
         string userName;
         Cart checkoutcart;
         Controller controllerObj;
-        string chosencard;
+        string chosencard = "";
         string address;
         public Checkout(Cart cart,string username)
         {
@@ -66,7 +66,7 @@ namespace Soleil_et_Soie
                 Total.AutoSize = true;
                 Total.Location = new Point(80, 50);
 
-                totalamount+= (int)(product.Price * product.Quantity);
+                totalamount+= (decimal)(product.Price * product.Quantity);
                 ProductPanel.Controls.Add(pictureBoxitem);
                 ProductPanel.Controls.Add(labelitem);
                 ProductPanel.Controls.Add(Quantity);
@@ -89,6 +89,7 @@ namespace Soleil_et_Soie
                     cards = controllerObj.GetCards(userid);
                     if (cards != null)
                     {
+                        buttonFinishOrder.Visible = false;
                         foreach (DataRow row in cards.Rows)
                         {
                             FlowLayoutPanel card = new FlowLayoutPanel();
@@ -137,7 +138,7 @@ namespace Soleil_et_Soie
                     }
                     else
                     {
-                        buttonFinishOrder.Visible = true;
+                        buttonFinishOrder.Visible = false;
                         FlowLayoutPanel details = new FlowLayoutPanel();
                         details.Size = new Size(flowLayoutCard.Width, 100);
                         details.FlowDirection = FlowDirection.LeftToRight;
@@ -188,6 +189,7 @@ namespace Soleil_et_Soie
                             if (!(holdernameBox.Text == "") && !(cardnumBox.Text == "") && !(cvvBox.Text == "") && !(yearBox.Text == "") && !(monthBox.Text == ""))
                             {
                                 SaveCard(holdernameBox.Text, cardnumBox.Text, cvvBox.Text, yearBox.Text, monthBox.Text);
+                                buttonFinishOrder.Visible = true;
                             }
                             else MessageBox.Show("Please fill in all fields");
                         };
@@ -230,7 +232,7 @@ namespace Soleil_et_Soie
         public void SaveCard(string holder,string cardnum, string cvv,string year,string month)
         {
             long CardNum;
-            int CVV;
+            long CVV;
             int YEAR, MONTH;
             if (!(holder.All(c => char.IsLetter(c))))
             { 
@@ -240,7 +242,7 @@ namespace Soleil_et_Soie
             {
                 MessageBox.Show("Card number cannot contain characters and should contain 16 digits");
             }
-            else if((!(int.TryParse(cvv, out CVV))) || cvv.Length != 3)
+            else if((!(long.TryParse(cvv, out CVV))) || cvv.Length != 3)
             {
                 MessageBox.Show("CVV cannot contain characters and consists of 3 digits");
             }
@@ -268,6 +270,57 @@ namespace Soleil_et_Soie
                 byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
+        }
+
+        private void buttonFinishOrder_Click(object sender, EventArgs e)
+        {
+            if (textBoxAddress.Text == "")
+            {
+                MessageBox.Show("Please Add your Address");
+            }
+            else
+            {
+                address= textBoxAddress.Text;
+                if (radioButtonCash.Checked)
+                {
+                    int orderid = 0;
+                    DateTime time = DateTime.Now;
+                    string orderdate = time.ToString("yyyy-MM-dd");
+                    DateTime nextday = time.AddDays(1);
+                    string deliverydate = nextday.ToString("yyyy-MM-dd");
+                    int result = controllerObj.AddOrder(userid, orderdate, totalamount, address, deliverydate, ref orderid);
+                    if (result == 0) { MessageBox.Show("Couldnot Place Order"); } else {
+                        RestockStatus.status = 1;
+                        MessageBox.Show("Expect your order in the next 24 hours!"); }
+                    foreach (CartItem product in checkoutcart.items)
+                    {
+                        string name = product.Name;
+                        int quantity = product.Quantity;
+                        int result2 = controllerObj.AddProdOrder(name, quantity, orderid);
+                    }
+                }
+                else if (radioButtonCard.Checked && chosencard!="")
+                {
+                    int orderid = 0;
+                    DateTime time = DateTime.Now;
+                    string orderdate = time.ToString("yyyy-MM-dd");
+                    DateTime nextday = time.AddDays(1);
+                    string deliverydate = nextday.ToString("yyyy-MM-dd");
+                    int result = controllerObj.AddOrder(userid, orderdate, totalamount, address, deliverydate, ref orderid);
+                    if (result == 0) { MessageBox.Show("Couldnot Place Order"); } else {
+                        RestockStatus.status = 1;
+                        MessageBox.Show("Expect your order in the next 24 hours!"); }
+                    foreach (CartItem product in checkoutcart.items)
+                    {
+                        string name = product.Name;
+                        int quantity = product.Quantity;
+                        int result2 = controllerObj.AddProdOrder(name, quantity, orderid);
+                    }
+
+                }
+            }
+
+
         }
     }
 }

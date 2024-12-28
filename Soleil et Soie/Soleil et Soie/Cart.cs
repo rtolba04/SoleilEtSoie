@@ -90,6 +90,6 @@ namespace Soleil_et_Soie
         public string Name { get; set; }
         public int Quantity { get; set; }
         public Image Image { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } 
     }
 }

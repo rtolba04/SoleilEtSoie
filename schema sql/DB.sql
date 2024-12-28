@@ -138,6 +138,7 @@ ON UPDATE CASCADE
 ON DELETE NO ACTION
 );
 
+
 --done
 create table ProductMaterial(
 Product_ID int,
@@ -198,6 +199,10 @@ Use SoleiletSoie
 ALTER TABLE Users
 ALTER COLUMN Password VARCHAR(300);
 
+Use SoleiletSoie
+ALTER TABLE CardDetails
+ALTER COLUMN CVV VARCHAR(300);
+
 ALTER TABLE Designs
 ADD Material_ID INT;
 
@@ -250,4 +255,13 @@ UPDATE Products SET StockQuantity=20 WHERE ProductName='dress1';
 
 Use SoleiletSoie
 SELECT EndsIn FROM CardDetails WHERE User_ID=15;
-INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES (15,'JayJay mshmsh',300,2,'2026-12-20',300);
+Use SoleiletSoie
+INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES (1009,'JayJay mshmsh',5555456,2,'2026-12-20',456);
+
+Use SoleiletSoie
+INSERT INTO ProductOrders (Product_ID, Order_ID, Quantity)  VALUES(5,7,7);
+
+Use SoleiletSoie
+SELECT OrderID FROM Orders WHERE User_ID = 1007 AND UserType = 'user' AND OrderDate = '"+orderdate+"' AND Status= 'out for delivery' AND TotalAmount "+totalamount+" AND DeliveryAddress = '"+address+"' AND DeliveryDate = '"+deliverydate+"';";
+
+

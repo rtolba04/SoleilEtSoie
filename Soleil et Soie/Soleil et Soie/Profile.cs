@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +17,15 @@ namespace Soleil_et_Soie
     public partial class Profile : Form
     {
         Controller controllerObj;
+        int userid;
         public Profile(string UserName)
         {
             InitializeComponent();
             controllerObj = new Controller();
             labelUserName.Text = UserName; //sets label to username taken from previous form (userhomepage)
+            DataTable userinfo = controllerObj.RetrieveUserInfo(labelUserName.Text);
+            DataRow row = userinfo.Rows[0];
+            userid = (int)row["UserID"];
         }
         //event to notify userhomepage that profile picture was updated
         public event Action<byte[]> ProfilePictureUpdated;
@@ -63,7 +68,7 @@ namespace Soleil_et_Soie
             DataTable userinfo = controllerObj.RetrieveUserInfo(labelUserName.Text);
             DataRow row = userinfo.Rows[0];
             string prevusername = row["UserName"].ToString();
-            int userid = (int)row["UserID"];
+            userid = (int)row["UserID"];
             string prevpassword = row["Password"].ToString();
             long prevphoneNumber = (long)row["PhoneNumber"];
             string prevaddress;
@@ -156,7 +161,41 @@ namespace Soleil_et_Soie
 
         private void buttonSaveCard_Click(object sender, EventArgs e)
         {
-
+            int year, month;
+            long num,num2;
+            if (textBoxCardName.Text == "" || textBoxCardNo.Text == "" || textBoxCVV.Text == "" || textBoxExpDateYear.Text == "" || textBoxExpDateMonth.Text == "")
+            {
+                MessageBox.Show("Card Info Fields Cannot be Empty!");
+            }else if (!(textBoxCardName.Text.All(c => char.IsLetter(c))))
+            {
+                MessageBox.Show("Card holder name cannot contain numbers");
+            }
+            else if ((!(long.TryParse(textBoxCardNo.Text, out num))) || textBoxCardNo.Text.Length != 16)
+            {
+                MessageBox.Show("Card number cannot contain characters and should contain 16 digits");
+            }
+            else if ((!(long.TryParse(textBoxCVV.Text, out num2))) || textBoxCVV.Text.Length != 3)
+            {
+                MessageBox.Show("CVV cannot contain characters and consists of 3 digits");
+            }
+            else if (!(int.TryParse(textBoxExpDateYear.Text, out year)) || !(int.TryParse(textBoxExpDateMonth.Text, out month)) || year < 2024 || month < 1 || month > 12)
+            {
+                MessageBox.Show("Invalid expiry date");
+            }
+            else
+            {
+                int EndsIn = int.Parse(textBoxCardNo.Text.Substring(textBoxCardNo.Text.Length - 4));
+                string hashedcvv= Hash(textBoxCVV.Text);
+                string hashedcardno=Hash(textBoxCardNo.Text);
+                if(controllerObj.SaveCardDetails(userid, textBoxCardName.Text, hashedcardno, hashedcvv, year, month, EndsIn))
+                {
+                    MessageBox.Show("Successfully Added Card");
+                }
+                else
+                {
+                    MessageBox.Show("Couldnot Add Card");
+                }
+            }
         }
         
 
@@ -200,6 +239,15 @@ namespace Soleil_et_Soie
             controllerObj.ProfilePicture(labelUserName.Text, ref imagebytes);
             if (imagebytes != null)
                 pictureBoxProfile.Image = ByteArraytoImage(imagebytes);
+        }
+
+        public static string Hash(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
         }
     }
 }
