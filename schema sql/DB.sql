@@ -39,7 +39,6 @@ Description VARCHAR(200),
 Material_ID INT,
 Collection_ID INT,
 Material_Quantity INT,
-Design_Description VARCHAR(100)
 foreign key (Designer_ID) references Users(UserID)
 ON UPDATE CASCADE
 ON DELETE SET DEFAULT,
@@ -47,6 +46,7 @@ foreign key (DesignCategory_ID) references Category(CategoryID)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
+
 
 --done
 create table Products(
@@ -246,12 +246,13 @@ ON DELETE no action
 
 --ALTER TABLE Designs
 --ADD Material_Quantity INT;
-
---UPDATE Users SET Password='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' WHERE UserName='Soleil Et Soie'; --changing main admin pass to hashed version
+--Use SoleiletSoie
+--UPDATE Users SET UserType='designer' WHERE UserName='george'; --changing main admin pass to hashed version
 
 
 
 --TESTING SQL
+--Use SoleiletSoie
 --INSERT INTO Category(CategoryName) VALUES ('testcat');
 
 --Use SoleiletSoie
@@ -289,3 +290,77 @@ ON DELETE no action
 --('Summer','Summer','2024/12/28','2025/3/28'),
 --('Winter','Winter','2024/12/28','2025/3/28'),
 --('Fall','Fall','2024/12/28','2025/3/28');
+
+--pass is 1 for all
+Use SoleiletSoie
+INSERT INTO Users (UserName, Password, PhoneNumber, Address, Email, DateCreated, UserType, Status)VALUES 
+('cust1' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust1@email','2024/12/23','user','active'),
+('cust2' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust2@email','2024/12/23','user','active'),
+('cust3' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust3@email','2024/12/23','user','active'),
+('cust4' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust4@email','2024/12/23','user','active'),
+('cust5' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust5@email','2024/12/23','user','active'),
+('cust6' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust6@email','2024/12/23','user','active'),
+('cust7' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust21@email','2024/12/23','user','active'),
+('cust8' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust123@email','2024/12/23','user','active'),
+('cust9' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust123421@email','2024/12/23','user','active'),
+('cust10' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust1065@email','2024/12/23','user','active'),
+('cust11' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust121241@email','2024/12/23','admin','active'),
+('cust12' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust16742@email','2024/12/23','admin','active'),
+('cust13' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust111153@email','2024/12/23','admin','active'),
+('cust14' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust1654@email','2024/12/23','admin','active'),
+('cust15' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust1235@email','2024/12/23','admin','active'),
+('cust16' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust12666@email','2024/12/23','designer','active'),
+('cust17' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust715@email','2024/12/23','designer','active'),
+('cust18' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust8124@email','2024/12/23','designer','active'),
+('cust19' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust9124@email','2024/12/23','designer','active'),
+('cust20' , '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b',01234567890,'Egypt','cust21240@email','2024/12/23','designer','active');
+
+Use SoleiletSoie
+INSERT INTO Category(CategoryName) VALUES 
+('Clothes'),
+('Bags'),
+('Shoes'),
+('Jewelry');
+
+Use SoleiletSoie
+INSERT INTO Collection(CollectionName,Season,StartDate,EndDate) VALUES
+('Spring','Spring','2024/12/28','2025/3/28'),
+('Summer','Summer','2024/12/28','2025/3/28'),
+('Winter','Winter','2024/12/28','2025/3/28'),
+('Fall','Fall','2024/12/28','2025/3/28');
+
+Use SoleiletSoie
+INSERT INTO Designs(DesignName,ApprovalDate,SubmissionDate,ApprovalStatus,DesignCategory_ID,Designer_ID,Collection_ID) VALUES
+('Dress1','2024/12/12','2024/12/12','approved', 2, 1053,1 ),
+('Dress2','2024/12/12','2024/12/12','approved', 2, 1053, 1),
+('Dress3','2024/12/12','2024/12/12','approved', 2, 1053, 1),
+('Dress30','2024/12/12','2024/12/12','approved', 2, 1053, 1),
+('Dress4','2024/12/12','2024/12/12','approved', 2, 1053, 1),
+('Dress5','2024/12/12','2024/12/12','approved', 3, 1054, 2),
+('Dress6','2024/12/12','2024/12/12','approved', 3, 1054, 2),
+('Dress7','2024/12/12','2024/12/12','approved', 3, 1054, 2),
+('Dress8','2024/12/12','2024/12/12','approved', 3, 1054, 2),
+('Dress9','2024/12/12','2024/12/12','approved', 3, 1054, 2),
+('Dress10','2024/12/12','2024/12/12','approved', 4, 1055,3 ),
+('Dress11','2024/12/12','2024/12/12','pending', 4, 1055, 3),
+('Dress12','2024/12/12','2024/12/12','pending', 4,1055, 3),
+('Dress13','2024/12/12','2024/12/12','pending', 4, 1055, 3),
+('Dress14','2024/12/12','2024/12/12','pending', 4, 1055, 3),
+('Dress15','2024/12/12','2024/12/12','pending', 4, 1055, 4),
+('Dress16','2024/12/12','2024/12/12','pending', 5, 1055, 4),
+('Dress17','2024/12/12','2024/12/12','pending', 5, 1055, 4),
+('Dress18','2024/12/12','2024/12/12','pending', 5, 1055, 4),
+('Dress19','2024/12/12','2024/12/12','pending', 5, 1055, 4),
+('Dress20','2024/12/12','2024/12/12','pending', 5, 1055, 4);
+
+
+Use SoleiletSoie
+INSERT INTO Products(ProductName,DateAdded,StockQuantity,Price,Description,Status,Category_ID,Design_ID) VALUES 
+('Dress1','2024/12/12',500,20,'awesome','approved',2,1006 ),
+('Dress2','2024/12/12',1000,50,'awesome','approved', 2, 1007),
+('Dress3','2024/12/12',1500,50,'awesome','approved', 3, 1012),
+('Dress30','2024/12/12',200,10,'awesome','approved', 3, 1013),
+('Dress4','2024/12/12',100,92,'awesome','approved', 4, 1018),
+('Dress5','2024/12/12',2900,100,'awesome','approved', 4,  1019),
+('Dress6','2024/12/12',900,29,'awesome','approved', 5,  1023),
+('Dress7','2024/12/12',1000,53,'awesome','approved', 5, 1024);
