@@ -218,6 +218,25 @@ namespace Soleil_et_Soie
             return (int)dbMan.ExecuteNonQuery(query2); 
         }
 
+        public DataTable GetProductsFB()
+        {
+            string query = "SELECT ProductID,ProductName FROM Products";
+            return dbMan.ExecuteReader(query);
+        }
+        public int InsertFeedback(decimal rate,string message,int pid,string date,int userid)
+        {
+            string query;
+            if (pid == -1)
+            {
+                query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ");";
+            }
+            else
+            {
+                query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB,Product_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ","+pid+");";
+            }
+            return dbMan.ExecuteNonQuery(query);
+        }
+
     } 
         //public int tempinsertdesign(byte[] tempdesign)
         //{

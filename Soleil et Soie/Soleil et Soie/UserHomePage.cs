@@ -19,6 +19,7 @@ namespace Soleil_et_Soie
         Controller controllerObj;
         Profile userprofile;
         Cart MyCart;
+        Form feedback;
         public UserHomePage(string UserName)
         {
             InitializeComponent();
@@ -257,6 +258,13 @@ namespace Soleil_et_Soie
                 }
             }
 
+        }
+
+        private void FeedBackButton_Click(object sender, EventArgs e)
+        {
+            int id=controllerObj.GetUserNoPass(UsernameLabel.Text);
+            feedback= new Feedback(id);
+            feedback.Show();
         }
     }
     //class to hold imageinfo retrieved from db

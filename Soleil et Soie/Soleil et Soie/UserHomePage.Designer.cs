@@ -233,6 +233,7 @@
             this.FeedBackButton.TabIndex = 3;
             this.FeedBackButton.Text = "Help/Contact Us";
             this.FeedBackButton.UseVisualStyleBackColor = false;
+            this.FeedBackButton.Click += new System.EventHandler(this.FeedBackButton_Click);
             // 
             // LogoutButton
             // 
