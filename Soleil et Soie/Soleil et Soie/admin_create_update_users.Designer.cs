@@ -49,6 +49,12 @@
             this.error4 = new System.Windows.Forms.Label();
             this.error5 = new System.Windows.Forms.Label();
             this.error6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.getuserscombo = new System.Windows.Forms.ComboBox();
+            this.address_textbox = new System.Windows.Forms.TextBox();
+            this.address_label = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -248,17 +254,80 @@
             // 
             this.error6.AutoSize = true;
             this.error6.ForeColor = System.Drawing.Color.Red;
-            this.error6.Location = new System.Drawing.Point(268, 290);
+            this.error6.Location = new System.Drawing.Point(227, 292);
             this.error6.Name = "error6";
             this.error6.Size = new System.Drawing.Size(155, 16);
             this.error6.TabIndex = 21;
             this.error6.Text = "please choose user type";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(518, 180);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(266, 16);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "select username of user you want to update:";
+            // 
+            // getuserscombo
+            // 
+            this.getuserscombo.FormattingEnabled = true;
+            this.getuserscombo.Location = new System.Drawing.Point(543, 214);
+            this.getuserscombo.Name = "getuserscombo";
+            this.getuserscombo.Size = new System.Drawing.Size(121, 24);
+            this.getuserscombo.TabIndex = 23;
+            this.getuserscombo.Visible = false;
+            this.getuserscombo.SelectedIndexChanged += new System.EventHandler(this.getuserscombo_SelectedIndexChanged);
+            // 
+            // address_textbox
+            // 
+            this.address_textbox.Location = new System.Drawing.Point(597, 256);
+            this.address_textbox.Name = "address_textbox";
+            this.address_textbox.Size = new System.Drawing.Size(100, 22);
+            this.address_textbox.TabIndex = 24;
+            this.address_textbox.Visible = false;
+            // 
+            // address_label
+            // 
+            this.address_label.AutoSize = true;
+            this.address_label.Location = new System.Drawing.Point(531, 259);
+            this.address_label.Name = "address_label";
+            this.address_label.Size = new System.Drawing.Size(60, 16);
+            this.address_label.TabIndex = 25;
+            this.address_label.Text = "address:";
+            this.address_label.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(53, 399);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 29);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Switch to Update mode";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(78, 434);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(114, 23);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "Update User";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // admin_create_update_users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 450);
+            this.ClientSize = new System.Drawing.Size(941, 503);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.address_label);
+            this.Controls.Add(this.address_textbox);
+            this.Controls.Add(this.getuserscombo);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.error6);
             this.Controls.Add(this.error5);
             this.Controls.Add(this.error4);
@@ -310,5 +379,11 @@
         private System.Windows.Forms.Label error4;
         private System.Windows.Forms.Label error5;
         private System.Windows.Forms.Label error6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox getuserscombo;
+        private System.Windows.Forms.TextBox address_textbox;
+        private System.Windows.Forms.Label address_label;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
