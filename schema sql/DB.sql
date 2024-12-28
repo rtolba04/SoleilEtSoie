@@ -7,14 +7,15 @@ USE SoleiletSoie;
 create table Users(
 UserName varchar(30) not null unique,
 UserID int IDENTITY (0,1) PRIMARY KEY, --first account created will be SoleiletSoie
-Password VARCHAR(50) NOT NULL,
+Password VARCHAR(300) NOT NULL,
 PhoneNumber BIGINT,
 Address varchar(50),
 Email varchar(50) not null unique,
 DateCreated date not null,
 UserType varchar(30) not null,
 Status varchar(30) not null,
-Gender varchar(30)
+Gender varchar(30),
+ProfilePicture VARBINARY(MAX)
 );
 
 --done
@@ -34,6 +35,11 @@ DesignImage VARBINARY(MAX),
 ApprovalStatus varchar(30) not null,
 DesignCategory_ID int not null,
 Designer_ID int not null DEFAULT 0,
+Description VARCHAR(200),
+Material_ID INT,
+Collection_ID INT,
+Material_Quantity INT,
+Design_Description VARCHAR(100)
 foreign key (Designer_ID) references Users(UserID)
 ON UPDATE CASCADE
 ON DELETE SET DEFAULT,
@@ -111,7 +117,11 @@ MaterialName varchar(30) not null unique,
 DateAdded date not null,
 StockQuantity int not null,
 UnitCost money not null,
-Status varchar(30) not null
+Status varchar(30) not null,
+Vendor_ID INT NOT NULL
+FOREIGN KEY (Vendor_ID) REFERENCES Vendor
+ON UPDATE NO ACTION
+ON DELETE NO ACTION
 );
 
 --done
@@ -166,48 +176,116 @@ FOREIGN KEY (Vendor_ID) REFERENCES Vendor(VendorID)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
 FOREIGN KEY (Material_ID) REFERENCES Materials(MaterialID)
-ON UPDATE CASCADE
+ON UPDATE NO ACTION
 ON DELETE NO ACTION
 );
 
-INSERT INTO Users (UserName, Password, PhoneNumber, Address, Email, DateCreated, UserType, Status)VALUES 
-('Soleil et Soie' , 'password',01234567890,'123 Baker st.','soleil.fashion@gmail.com','2024/12/23','admin','active');
-
-Use SoleiletSoie
---ALTER TABLE Products
---ADD CONSTRAINT FK_Products_Collection foreign key (Collection_ID) references Collection(CollectionID)
---ON UPDATE CASCADE
---ON DELETE SET NULL;
-Use SoleiletSoie
-ALTER TABLE Users
-ALTER COLUMN Password VARCHAR(300);
-
-ALTER TABLE Designs
-ADD Material_ID INT;
-
-ALTER TABLE Designs
-ADD CONSTRAINT FK_Design_Material foreign key (Material_ID) references Materials(MaterialID)
+CREATE TABLE CardDetails(
+User_ID INT,
+CardNumber VARCHAR(300) not null unique,
+CardHolder VARCHAR(50) NOT NULL,
+CVV VARCHAR(300) NOT NULL,
+ExpDate DATE NOT NULL,
+EndsIn INT not null,
+PRIMARY KEY (User_ID,CardNumber),
+FOREIGN KEY (User_ID) REFERENCES Users
 ON UPDATE CASCADE
-ON DELETE CASCADE;
+ON DELETE CASCADE
+);
+
+INSERT INTO Users (UserName, Password, PhoneNumber, Address, Email, DateCreated, UserType, Status)VALUES 
+('Soleil et Soie' , '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',01234567890,'123 Baker st.','soleil.fashion@gmail.com','2024/12/23','admin','active');
+
+
+
+--DESIGNS TABLE
+Use SoleiletSoie
+ALTER TABLE Designs
+ADD CONSTRAINT FK_Design_Materials FOREIGN KEY (Material_ID) REFERENCES Materials(MaterialID)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 
 ALTER TABLE Designs
-ADD Collection_ID INT;
-
-ALTER TABLE Designs
-ADD CONSTRAINT FK_Design_Collection foreign key (Collection_ID) references Collection(CollectionID)
+ADD CONSTRAINT FK_Designs_Collections FOREIGN KEY (Collection_ID) REFERENCES Collection(CollectionID)
 ON UPDATE no action
-ON DELETE no action;
+ON DELETE no action
+
+--Use SoleiletSoie
+--ALTER TABLE Users 
+--ADD ProfilePicture VARBINARY(MAX);
+
+--Use SoleiletSoie
+--ALTER TABLE Users
+--ALTER COLUMN Password VARCHAR(300);
+
+--Use SoleiletSoie
+--ALTER TABLE Feedback
+--ALTER COLUMN Product_FB INT NULL;
+
+--Use SoleiletSoie
+--ALTER TABLE CardDetails
+--ALTER COLUMN CVV VARCHAR(300);
 
 --ALTER TABLE Designs
---ADD Category_ID INT;
+--ADD Material_ID INT;
 
 --ALTER TABLE Designs
---ADD CONSTRAINT FK_Design_category foreign key (Category_ID) references Category(CategoryID)
+--ADD CONSTRAINT FK_Design_Material foreign key (Material_ID) references Materials(MaterialID)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE;
+
+--ALTER TABLE Designs
+--ADD Collection_ID INT;
+
+--ALTER TABLE Designs
+--ADD CONSTRAINT FK_Design_Collection foreign key (Collection_ID) references Collection(CollectionID)
 --ON UPDATE no action
 --ON DELETE no action;
 
-ALTER TABLE Designs
-ADD Material_Quantity INT;
 
-Use SoleiletSoie
-UPDATE Users SET Password='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' WHERE UserName='Soleil Et Soie'; --changing main admin pass to hashed version
+
+--ALTER TABLE Designs
+--ADD Material_Quantity INT;
+
+--UPDATE Users SET Password='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' WHERE UserName='Soleil Et Soie'; --changing main admin pass to hashed version
+
+
+
+--TESTING SQL
+--INSERT INTO Category(CategoryName) VALUES ('testcat');
+
+--Use SoleiletSoie
+--INSERT INTO Designs(DesignName,ApprovalDate,SubmissionDate,ApprovalStatus,DesignCategory_ID,Designer_ID) VALUES ('test2','2024-12-26','2024-12-26','Approved',1,16);
+--INSERT INTO Designs(DesignName,ApprovalDate,SubmissionDate,ApprovalStatus,DesignCategory_ID,Designer_ID) VALUES ('test','2024-12-26','2024-12-26','Approved',1,16);
+
+--INSERT INTO Products(ProductName,DateAdded,StockQuantity,Price,Description,Status,Category_ID,Design_ID) VALUES 
+--('dress1','2024/12/26',20,500,'wow so dress','approved',1,3),
+--('dress2','2024/12/26',30,1000,'wow so dress','approved',1,4);
+
+
+--Use SoleiletSoie
+--INSERT INTO Orders VALUES (1009,'User', '2024/12/12','Out For Delivery','3000','wtv','2024/12/14')
+
+--Use SoleiletSoie
+--UPDATE Products SET StockQuantity=20 WHERE ProductName='dress1';
+
+--Use SoleiletSoie
+--SELECT EndsIn FROM CardDetails WHERE User_ID=15;
+--INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES (15,'JayJay mshmsh',300,2,'2026-12-20',300);
+
+--Use SoleiletSoie
+--SELECT ProductsID,ProductName FROM Products
+
+--Use SoleiletSoie
+--INSERT INTO Category(CategoryName) VALUES
+--('Clothes'),
+--('Bags'),
+--('Shoes'),
+--('Jewelry');
+
+--Use SoleiletSoie
+--INSERT INTO Collection(CollectionName,Season,StartDate,EndDate) VALUES
+--('Spring','Spring','2024/12/28','2025/3/28'),
+--('Summer','Summer','2024/12/28','2025/3/28'),
+--('Winter','Winter','2024/12/28','2025/3/28'),
+--('Fall','Fall','2024/12/28','2025/3/28');

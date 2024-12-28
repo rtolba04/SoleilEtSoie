@@ -31,6 +31,7 @@ namespace Soleil_et_Soie
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
             int num;
@@ -41,6 +42,16 @@ namespace Soleil_et_Soie
             string email;
             string gender;
             //validation checks
+            void ResetErrorLabels()
+            {
+                labelError1.Visible = false;
+                labelError2.Visible = false;
+                labelError3.Visible = false;
+                labelError4.Visible = false;
+                labelError5.Visible = false;
+                labelError6.Visible = false;
+                labelError7.Visible = false;
+            }
             if (int.TryParse(textBoxUserName.Text, out num)) //not digits only
             {
                 labelError2.Visible = false;
@@ -112,6 +123,7 @@ namespace Soleil_et_Soie
             }
             else
             {
+                ResetErrorLabels();
                 //sets user details for insert query
                 username = textBoxUserName.Text;
                 password = textBoxPassword.Text;
@@ -137,6 +149,16 @@ namespace Soleil_et_Soie
                     userhomepage.Show();
                 };
             }
+        }
+
+        private void ShowPassPic_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '\0';
+        }
+
+        private void ShowPassPic_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '*';
         }
     }
 }
