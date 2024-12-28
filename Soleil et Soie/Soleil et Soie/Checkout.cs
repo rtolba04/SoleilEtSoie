@@ -62,11 +62,11 @@ namespace Soleil_et_Soie
                 Quantity.AutoSize = true;
                 Quantity.Location = new Point(80, 48);
                 Label Total = new Label();
-                Total.Text = "Total: " + (product.Price * product.Quantity).ToString("C");
+                Total.Text = "Total: " + ((product.Price * product.Quantity) * (decimal)1.15);
                 Total.AutoSize = true;
                 Total.Location = new Point(80, 50);
 
-                totalamount+= (decimal)(product.Price * product.Quantity);
+                totalamount+= ((product.Price * product.Quantity) * (decimal)1.15);
                 ProductPanel.Controls.Add(pictureBoxitem);
                 ProductPanel.Controls.Add(labelitem);
                 ProductPanel.Controls.Add(Quantity);

@@ -28,7 +28,7 @@ namespace Soleil_et_Soie
                 controllerObj = new Controller();
                 UsernameLabel.Text = UserName;
                 userprofile = new Profile(UserName);
-                DisplayImages();
+                DisplayImages(0,"");
                 MyCart = new Cart(UserName);
             }
             
@@ -83,29 +83,32 @@ namespace Soleil_et_Soie
                 UserProfile.Image = ByteArraytoImage(imagebytes);
         }
 
-        public void DisplayImages()
+        public void DisplayImages(int ColOrCat,string type)
         {
             int horizontalspace=30;
             int verticalspace = 20;
             DataTable images=new DataTable();
             List<ImageInfo> products = new List<ImageInfo>(); //list of imageinfo to hold all pictures
-            images = controllerObj.GetProducts(); //get table of pictures along with relevant data
-            //place each image in the list
-            foreach (DataRow row in images.Rows)
+            images = controllerObj.GetProducts(ColOrCat,type); //get table of pictures along with relevant data
+            if (images != null)
             {
-                Image image;
-                if (row["DesignImage"] != DBNull.Value)
+                //place each image in the list
+                foreach (DataRow row in images.Rows)
                 {
-                    image = ByteArraytoImage((byte[])row["DesignImage"]);
+                    Image image;
+                    if (row["DesignImage"] != DBNull.Value)
+                    {
+                        image = ByteArraytoImage((byte[])row["DesignImage"]);
+                    }
+                    else
+                    {
+                        image = null;
+                    }
+                    string productname = row["ProductName"].ToString();
+                    decimal price = Convert.ToDecimal(row["Price"]);
+                    int productid = (int)row["ProductID"];
+                    products.Add(new ImageInfo { productImage = image, name = productname, price = price, productid = productid });
                 }
-                else
-                {
-                    image = null;
-                }
-                string productname = row["ProductName"].ToString();
-                decimal price =Convert.ToDecimal(row["Price"]);
-                int productid = (int)row["ProductID"];
-                products.Add(new ImageInfo { productImage = image, name = productname, price = price, productid= productid });
             }
             double ProductsPerRow = Math.Floor((double)ProductsLayout.Width % (250 + 20));
             if (ProductsPerRow == 0) ProductsPerRow = 1;
@@ -267,6 +270,62 @@ namespace Soleil_et_Soie
             int id=controllerObj.GetUserNoPass(UsernameLabel.Text);
             feedback= new Feedback(id);
             feedback.Show();
+        }
+
+        private void buttonClothes_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(1, buttonClothes.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonBags_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(1, buttonBags.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonShoes_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(1, buttonShoes.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonJewelry_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(1, buttonJewelry.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonSpring_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(2, buttonSpring.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonSummer_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(2, buttonSummer.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonWinter_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(2, buttonWinter.Text);
+            ProductsLayout.BringToFront();
+        }
+
+        private void buttonFall_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(2, buttonFall.Text);
+            ProductsLayout.BringToFront();
         }
     }
     //class to hold imageinfo retrieved from db

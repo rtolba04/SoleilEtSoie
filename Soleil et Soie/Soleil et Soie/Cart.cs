@@ -67,7 +67,9 @@ namespace Soleil_et_Soie
                 Label quantityLabel = new Label { Text = "Quantity: " + item.Quantity, AutoSize = true, Location = new Point(10, 40) };
                 Label priceLabel = new Label { Text = "Price: "+(item.Price * item.Quantity).ToString("C"), AutoSize = true, Location = new Point(10, 70) };
                 PictureBox imageBox = new PictureBox { Image = item.Image, SizeMode = PictureBoxSizeMode.Zoom, Size = new Size(60, 60), Location = new Point(300, 10) };
-
+                labelOrderTotal.Text = (item.Price * item.Quantity).ToString("C");
+                labelTax.Text= ((item.Price * item.Quantity)*(decimal)0.15).ToString("C");
+                labelGrandTot.Text= ((item.Price * item.Quantity) * (decimal)1.15).ToString("C");
                 // Add controls to the panel
                 itemPanel.Controls.Add(nameLabel);
                 itemPanel.Controls.Add(quantityLabel);

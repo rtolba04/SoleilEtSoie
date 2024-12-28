@@ -32,16 +32,16 @@
             this.NavBarlayout = new System.Windows.Forms.FlowLayoutPanel();
             this.CategButton = new System.Windows.Forms.Button();
             this.CategLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.buttonClothes = new System.Windows.Forms.Button();
+            this.buttonBags = new System.Windows.Forms.Button();
+            this.buttonShoes = new System.Windows.Forms.Button();
+            this.buttonJewelry = new System.Windows.Forms.Button();
             this.CollectionsButton = new System.Windows.Forms.Button();
             this.CollectionsLayOut = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonSpring = new System.Windows.Forms.Button();
+            this.buttonSummer = new System.Windows.Forms.Button();
+            this.buttonWinter = new System.Windows.Forms.Button();
+            this.buttonFall = new System.Windows.Forms.Button();
             this.OrdersButton = new System.Windows.Forms.Button();
             this.FeedBackButton = new System.Windows.Forms.Button();
             this.LogoutButton = new System.Windows.Forms.Button();
@@ -90,57 +90,65 @@
             // 
             // CategLayout
             // 
-            this.CategLayout.Controls.Add(this.button5);
-            this.CategLayout.Controls.Add(this.button6);
-            this.CategLayout.Controls.Add(this.button7);
-            this.CategLayout.Controls.Add(this.button8);
+            this.CategLayout.AutoSize = true;
+            this.CategLayout.Controls.Add(this.buttonClothes);
+            this.CategLayout.Controls.Add(this.buttonBags);
+            this.CategLayout.Controls.Add(this.buttonShoes);
+            this.CategLayout.Controls.Add(this.buttonJewelry);
             this.CategLayout.Dock = System.Windows.Forms.DockStyle.Top;
             this.CategLayout.Location = new System.Drawing.Point(6, 35);
             this.CategLayout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategLayout.Name = "CategLayout";
-            this.CategLayout.Size = new System.Drawing.Size(157, 117);
+            this.CategLayout.Size = new System.Drawing.Size(153, 117);
             this.CategLayout.TabIndex = 5;
             this.CategLayout.Visible = false;
             // 
-            // button5
+            // buttonClothes
             // 
-            this.button5.Location = new System.Drawing.Point(3, 2);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(147, 23);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "Example collection";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonClothes.Location = new System.Drawing.Point(3, 2);
+            this.buttonClothes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClothes.Name = "buttonClothes";
+            this.buttonClothes.Size = new System.Drawing.Size(147, 23);
+            this.buttonClothes.TabIndex = 0;
+            this.buttonClothes.Text = "Clothes";
+            this.buttonClothes.UseVisualStyleBackColor = true;
+            this.buttonClothes.Click += new System.EventHandler(this.buttonClothes_Click);
             // 
-            // button6
+            // buttonBags
             // 
-            this.button6.Location = new System.Drawing.Point(3, 29);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(147, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "Example collection";
-            this.button6.UseVisualStyleBackColor = true;
+            this.buttonBags.AutoSize = true;
+            this.buttonBags.Location = new System.Drawing.Point(3, 29);
+            this.buttonBags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBags.Name = "buttonBags";
+            this.buttonBags.Size = new System.Drawing.Size(147, 26);
+            this.buttonBags.TabIndex = 1;
+            this.buttonBags.Text = "Bags";
+            this.buttonBags.UseVisualStyleBackColor = true;
+            this.buttonBags.Click += new System.EventHandler(this.buttonBags_Click);
             // 
-            // button7
+            // buttonShoes
             // 
-            this.button7.Location = new System.Drawing.Point(3, 56);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(147, 23);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Example collection";
-            this.button7.UseVisualStyleBackColor = true;
+            this.buttonShoes.AutoSize = true;
+            this.buttonShoes.Location = new System.Drawing.Point(3, 59);
+            this.buttonShoes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonShoes.Name = "buttonShoes";
+            this.buttonShoes.Size = new System.Drawing.Size(147, 26);
+            this.buttonShoes.TabIndex = 2;
+            this.buttonShoes.Text = "Shoes";
+            this.buttonShoes.UseVisualStyleBackColor = true;
+            this.buttonShoes.Click += new System.EventHandler(this.buttonShoes_Click);
             // 
-            // button8
+            // buttonJewelry
             // 
-            this.button8.Location = new System.Drawing.Point(3, 83);
-            this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(147, 23);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "Example collection";
-            this.button8.UseVisualStyleBackColor = true;
+            this.buttonJewelry.AutoSize = true;
+            this.buttonJewelry.Location = new System.Drawing.Point(3, 89);
+            this.buttonJewelry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonJewelry.Name = "buttonJewelry";
+            this.buttonJewelry.Size = new System.Drawing.Size(147, 26);
+            this.buttonJewelry.TabIndex = 3;
+            this.buttonJewelry.Text = "Jewelry";
+            this.buttonJewelry.UseVisualStyleBackColor = true;
+            this.buttonJewelry.Click += new System.EventHandler(this.buttonJewelry_Click);
             // 
             // CollectionsButton
             // 
@@ -157,63 +165,72 @@
             // 
             // CollectionsLayOut
             // 
-            this.CollectionsLayOut.Controls.Add(this.button1);
-            this.CollectionsLayOut.Controls.Add(this.button2);
-            this.CollectionsLayOut.Controls.Add(this.button3);
-            this.CollectionsLayOut.Controls.Add(this.button4);
+            this.CollectionsLayOut.AutoSize = true;
+            this.CollectionsLayOut.Controls.Add(this.buttonSpring);
+            this.CollectionsLayOut.Controls.Add(this.buttonSummer);
+            this.CollectionsLayOut.Controls.Add(this.buttonWinter);
+            this.CollectionsLayOut.Controls.Add(this.buttonFall);
             this.CollectionsLayOut.Dock = System.Windows.Forms.DockStyle.Top;
             this.CollectionsLayOut.Location = new System.Drawing.Point(6, 183);
             this.CollectionsLayOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CollectionsLayOut.Name = "CollectionsLayOut";
-            this.CollectionsLayOut.Size = new System.Drawing.Size(157, 117);
+            this.CollectionsLayOut.Size = new System.Drawing.Size(153, 120);
             this.CollectionsLayOut.TabIndex = 1;
             this.CollectionsLayOut.Visible = false;
             // 
-            // button1
+            // buttonSpring
             // 
-            this.button1.Location = new System.Drawing.Point(3, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Example collection";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonSpring.AutoSize = true;
+            this.buttonSpring.Location = new System.Drawing.Point(3, 2);
+            this.buttonSpring.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSpring.Name = "buttonSpring";
+            this.buttonSpring.Size = new System.Drawing.Size(147, 26);
+            this.buttonSpring.TabIndex = 0;
+            this.buttonSpring.Text = "Spring";
+            this.buttonSpring.UseVisualStyleBackColor = true;
+            this.buttonSpring.Click += new System.EventHandler(this.buttonSpring_Click);
             // 
-            // button2
+            // buttonSummer
             // 
-            this.button2.Location = new System.Drawing.Point(3, 29);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Example collection";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonSummer.AutoSize = true;
+            this.buttonSummer.Location = new System.Drawing.Point(3, 32);
+            this.buttonSummer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSummer.Name = "buttonSummer";
+            this.buttonSummer.Size = new System.Drawing.Size(147, 26);
+            this.buttonSummer.TabIndex = 1;
+            this.buttonSummer.Text = "Summer";
+            this.buttonSummer.UseVisualStyleBackColor = true;
+            this.buttonSummer.Click += new System.EventHandler(this.buttonSummer_Click);
             // 
-            // button3
+            // buttonWinter
             // 
-            this.button3.Location = new System.Drawing.Point(3, 56);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(147, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Example collection";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonWinter.AutoSize = true;
+            this.buttonWinter.Location = new System.Drawing.Point(3, 62);
+            this.buttonWinter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonWinter.Name = "buttonWinter";
+            this.buttonWinter.Size = new System.Drawing.Size(147, 26);
+            this.buttonWinter.TabIndex = 2;
+            this.buttonWinter.Text = "Winter";
+            this.buttonWinter.UseVisualStyleBackColor = true;
+            this.buttonWinter.Click += new System.EventHandler(this.buttonWinter_Click);
             // 
-            // button4
+            // buttonFall
             // 
-            this.button4.Location = new System.Drawing.Point(3, 83);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(147, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Example collection";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonFall.AutoSize = true;
+            this.buttonFall.Location = new System.Drawing.Point(3, 92);
+            this.buttonFall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonFall.Name = "buttonFall";
+            this.buttonFall.Size = new System.Drawing.Size(147, 26);
+            this.buttonFall.TabIndex = 3;
+            this.buttonFall.Text = "Fall";
+            this.buttonFall.UseVisualStyleBackColor = true;
+            this.buttonFall.Click += new System.EventHandler(this.buttonFall_Click);
             // 
             // OrdersButton
             // 
             this.OrdersButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.OrdersButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.OrdersButton.Location = new System.Drawing.Point(6, 304);
+            this.OrdersButton.Location = new System.Drawing.Point(6, 307);
             this.OrdersButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OrdersButton.Name = "OrdersButton";
             this.OrdersButton.Size = new System.Drawing.Size(149, 23);
@@ -226,7 +243,7 @@
             // 
             this.FeedBackButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FeedBackButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.FeedBackButton.Location = new System.Drawing.Point(6, 331);
+            this.FeedBackButton.Location = new System.Drawing.Point(6, 334);
             this.FeedBackButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FeedBackButton.Name = "FeedBackButton";
             this.FeedBackButton.Size = new System.Drawing.Size(149, 23);
@@ -239,7 +256,7 @@
             // 
             this.LogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.LogoutButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.LogoutButton.Location = new System.Drawing.Point(6, 358);
+            this.LogoutButton.Location = new System.Drawing.Point(6, 361);
             this.LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogoutButton.Name = "LogoutButton";
             this.LogoutButton.Size = new System.Drawing.Size(149, 27);
@@ -323,8 +340,11 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserHomePage_FormClosed);
             this.Load += new System.EventHandler(this.UserHomePage_Load);
             this.NavBarlayout.ResumeLayout(false);
+            this.NavBarlayout.PerformLayout();
             this.CategLayout.ResumeLayout(false);
+            this.CategLayout.PerformLayout();
             this.CollectionsLayOut.ResumeLayout(false);
+            this.CollectionsLayOut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserProfile)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -339,19 +359,19 @@
         private System.Windows.Forms.Label UsernameLabel;
         private System.Windows.Forms.Button CollectionsButton;
         private System.Windows.Forms.FlowLayoutPanel CollectionsLayOut;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonSpring;
+        private System.Windows.Forms.Button buttonSummer;
+        private System.Windows.Forms.Button buttonWinter;
+        private System.Windows.Forms.Button buttonFall;
         private System.Windows.Forms.Button OrdersButton;
         private System.Windows.Forms.Button FeedBackButton;
         private System.Windows.Forms.Button LogoutButton;
         private System.Windows.Forms.Button CategButton;
         private System.Windows.Forms.FlowLayoutPanel CategLayout;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button buttonClothes;
+        private System.Windows.Forms.Button buttonBags;
+        private System.Windows.Forms.Button buttonShoes;
+        private System.Windows.Forms.Button buttonJewelry;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel SortLayout;
         private System.Windows.Forms.FlowLayoutPanel ProductsLayout;

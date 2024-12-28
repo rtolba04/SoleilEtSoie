@@ -137,10 +137,38 @@ namespace Soleil_et_Soie
             }
             else imgbytes = null;
         }
-        public DataTable GetProducts()
+        public DataTable GetProducts(int ColOrCat,string type)
         {
-            DataTable dt = new DataTable();
-            string query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            //0=default
+            //1=collection
+            //2=category
+            string query;
+            if (ColOrCat == 0)
+            {
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
+            else if (ColOrCat == 1)
+            {
+                int colID;
+                string colquery = "SELECT CollectionID FROM Collection WHERE CollectionName='" + type + "';";
+                if (dbMan.ExecuteScalar(colquery) != null)
+                {
+                    colID = (int)dbMan.ExecuteScalar(colquery);
+                }
+                else colID = -1;
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID AND P.Collection_ID="+colID+" GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
+            else
+            {
+                int catID;
+                string colquery = "SELECT CategoryID FROM Category WHERE CategoryName='" + type + "';";
+                if (dbMan.ExecuteScalar(colquery) != null)
+                {
+                    catID = (int)dbMan.ExecuteScalar(colquery);
+                }
+                else catID = -1;
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID AND P.Category_ID=" + catID + " GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
             return dbMan.ExecuteReader(query);
         }
 
@@ -268,6 +296,5 @@ namespace Soleil_et_Soie
         //public string autofillcollection(string design)
         //{ }
     }
-}
 
 

@@ -42,7 +42,7 @@
             // buttonCheckOut
             // 
             this.buttonCheckOut.Location = new System.Drawing.Point(503, 311);
-            this.buttonCheckOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCheckOut.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCheckOut.Name = "buttonCheckOut";
             this.buttonCheckOut.Size = new System.Drawing.Size(179, 28);
             this.buttonCheckOut.TabIndex = 0;
@@ -53,7 +53,7 @@
             // buttonBack
             // 
             this.buttonBack.Location = new System.Drawing.Point(503, 388);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(179, 28);
             this.buttonBack.TabIndex = 1;
@@ -104,7 +104,7 @@
             // labelTax
             // 
             this.labelTax.AutoSize = true;
-            this.labelTax.Location = new System.Drawing.Point(588, 154);
+            this.labelTax.Location = new System.Drawing.Point(599, 155);
             this.labelTax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTax.Name = "labelTax";
             this.labelTax.Size = new System.Drawing.Size(131, 16);
@@ -125,7 +125,7 @@
             // 
             this.flowLayoutPanelCart.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelCart.Location = new System.Drawing.Point(45, 27);
-            this.flowLayoutPanelCart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelCart.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanelCart.Name = "flowLayoutPanelCart";
             this.flowLayoutPanelCart.Size = new System.Drawing.Size(392, 389);
             this.flowLayoutPanelCart.TabIndex = 8;
@@ -144,7 +144,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonCheckOut);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Cart";
             this.Text = "My Cart";
             this.ResumeLayout(false);
