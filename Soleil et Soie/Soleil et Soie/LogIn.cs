@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Security.Cryptography;
 
 namespace Soleil_et_Soie
 {
@@ -24,30 +25,61 @@ namespace Soleil_et_Soie
             dt=new DataTable();
         }
 
+        public static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
+
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             string type="";
-            bool exists = controllerObj.GetLogin(textBoxUserName.Text, textBoxPass.Text,ref type);
+            string hashed = HashPassword(textBoxPass.Text);
+            bool exists = controllerObj.GetLogin(textBoxUserName.Text, hashed,ref type);
             if (!exists)
             {
                 labelError.Visible = true;
             }
             else
             {
-                if (type == "user")
+                labelError.Visible = false;
+                int result = controllerObj.LoggedIn(textBoxUserName.Text);
+                if(result == 0)
                 {
-                    userhomepage = new UserHomePage(textBoxUserName.Text);
-                    userhomepage.Show();
+                    MessageBox.Show("Couldn't Log In! Please Contact Our Customer Support!");
                 }
-                else if (type == "admin")
+                else
                 {
-                    //this is just for testing
-                    MessageBox.Show("You are an admin");
-                    adminFunctionalities f = new adminFunctionalities();
-                    f.Show();
-                }
+                    MessageBox.Show("Logged In Successfully!");
+                    if (type == "user")
+                    {
+                        userhomepage = new UserHomePage(textBoxUserName.Text);
+                        userhomepage.Show();
+                    }
+                    else if (type == "admin")
+                    {
+                        //this is just for testing
+                        MessageBox.Show("You are an admin");
+                        adminFunctionalities f = new adminFunctionalities();
+                        f.Show();
+                    }
+                    //else if (type == "designer")
+                    //{
+                    //int desID = controllerObj.GetUserID(textBoxUserName.Text, textBoxPass.Text);
+                    //designerhome designerhome = new designerhome( textBoxUserName.Text, desID);
+                    //designerhome.Show();
+                    //// designer des = new designer();
+                    ////des.Show();
+                    //}
+                    
+                }   
             }
         }
+
 
         private void linkLabelsignin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -67,7 +99,8 @@ namespace Soleil_et_Soie
             if (e.KeyCode == Keys.Enter)
             {
                 string type = "";
-                bool exists = controllerObj.GetLogin(textBoxUserName.Text, textBoxPass.Text,ref type);
+                string hashed = HashPassword(textBoxPass.Text);
+                bool exists = controllerObj.GetLogin(textBoxUserName.Text, hashed, ref type);
                 if (!exists)
                 {
                     labelError.Visible = true;
@@ -86,6 +119,16 @@ namespace Soleil_et_Soie
                 }
             }
             }
+
+        private void ShowPassPic_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBoxPass.PasswordChar = '\0';
         }
+
+        private void ShowPassPic_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBoxPass.PasswordChar = '*';
+        }
+    }
     }
 

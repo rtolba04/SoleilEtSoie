@@ -15,6 +15,10 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Net;
+using System.Collections;
+using System.Runtime.Remoting.Messaging;
+
 
 namespace Soleil_et_Soie
 {
@@ -33,25 +37,62 @@ namespace Soleil_et_Soie
         public bool GetLogin(string username, string password, ref string type)
         {
             string typequery = "SELECT UserType FROM Users WHERE UserName ='" + username + "';";
-            type = dbMan.ExecuteScalar(typequery).ToString();
             string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" + username + "' AND Password ='" + password + "';";
             int result = (int)dbMan.ExecuteScalar(query);
-            return result == 1;
+            if (result == 1)
+            {
+                type = dbMan.ExecuteScalar(typequery).ToString();
+                return true;
+            }
+            else return false;
+        }
+      
+        public int GetUserID(string username, string password)
+        {
+            string query = "SELECT UserID FROM Users WHERE UserName ='" + username + "' AND Password ='" + password + "';";
+            int id = (int)dbMan.ExecuteScalar(query);
+            return id;
         }
 
-        public int InsertNewUser(string un, string pw, int pn, string e, string g, string dc)
+        public int InsertNewUser(string un, string pw, long pn, string e, string g, string dc)
+
         {
             string query;
             if (g == "NULL")
             {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + "'," + e + "'" + dc + "' , 'user' , 'active' );";
+            query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + " ,'" + e + "','" + dc + "' , 'user' , 'Logged In' );";
+
+                //; uncomment if error
             }
             else
             {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','" + dc + "', 'user', 'active', '" + g + "');";
+                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','" + dc + "', 'user', 'Logged In', '" + g + "');";
+
             }
             return dbMan.ExecuteNonQuery(query);
         }
+        public int subDesign(string desname, string subdate, byte[] b, int desID)
+        {
+            string query = $"INSERT INTO Designs(DesignID, DesignName, ApprovalDate, SubmissionDate, DesignImage, ApprovalStatus, Designer_ID) VALUES ('1','" + desname + "','" + subdate + "','" + subdate + "','" + b + "','Pending', '" + desID + "');";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable selectDesign()
+        {
+            string query = "SELECT DesignName FROM Designs;";
+            return dbMan.ExecuteReader(query);
+        }
+        public string autofillcat(string design)
+        {
+            string query = "SELECT Category FROM Category AND Designs WHERE ;";
+            return dbMan.ExecuteReader(query).ToString();
+        }
+
+        public int LoggedIn(string username)
+        {
+            string query = "UPDATE Users SET status = 'Logged In' WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
 
         public int createuser(string un, string pw, int pn, string e, string g, string ut, string dc)
         {
@@ -63,6 +104,203 @@ namespace Soleil_et_Soie
             else
             {
                 query = $"insert into Users(UserName,Password,PhoneNumber,Email,DateCreated,UserType,Status) values('{un}','{pw}',{pn},'{e}','{dc}','{ut}','active');";
+            }
+        }
+        public int LoggedOut(string username)
+        {
+            string query = "UPDATE Users SET status = 'Logged Out' WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        public DataTable RetrieveUserInfo(string username)
+        {
+            string query = "SELECT * FROM Users WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteReader(query);
+        }
+        public int UpdateUserDetails(string un, int id, string pw, long pn, string a, string e, string dc, string ut, string s, string g)
+        {
+            string query;
+            if (a == "NULL" && g == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + " ,Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "' WHERE UserID =" + id + ";";
+
+            }
+            else if (a == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "',Gender = '" + g + "' WHERE UserID =" + id + ";";
+            }
+            else if (g == "NULL")
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Address = '" + a + "',Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "' WHERE UserID =" + id + ";";
+            }
+            else
+            {
+                query = "UPDATE Users SET UserName = '" + un + "',Password = '" + pw + "',PhoneNumber = " + pn + ",Address = '" + a + "',Email = '" + e + "',DateCreated = '" + dc + "',UserType = '" + ut + "',Status = '" + s + "',Gender = '" + g + "' WHERE UserID =" + id + ";";
+            }
+
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        //takes byte array, converts it to hexstring, inserts it into db
+        public int ChangeProfile(string username, byte[] imagebytes)
+        {
+            string hexString = BitConverter.ToString(imagebytes).Replace("-", "");
+            string query = "UPDATE Users SET ProfilePicture= 0x" + hexString + " WHERE UserName='" + username + "';";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
+        //retrieves bytearray from db
+        public void ProfilePicture(string username, ref byte[] imgbytes)
+        {
+            string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
+            if (dbMan.ExecuteScalar(query) != DBNull.Value)
+            {
+                imgbytes = (byte[])dbMan.ExecuteScalar(query);
+            }
+            else imgbytes = null;
+        }
+        public DataTable GetProducts(int ColOrCat,string type)
+        {
+            //0=default
+            //1=collection
+            //2=category
+            string query;
+            if (ColOrCat == 0)
+            {
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
+            else if (ColOrCat == 1)
+            {
+                int colID;
+                string colquery = "SELECT CollectionID FROM Collection WHERE CollectionName='" + type + "';";
+                if (dbMan.ExecuteScalar(colquery) != null)
+                {
+                    colID = (int)dbMan.ExecuteScalar(colquery);
+                }
+                else colID = -1;
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID AND P.Collection_ID="+colID+" GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
+            else
+            {
+                int catID;
+                string colquery = "SELECT CategoryID FROM Category WHERE CategoryName='" + type + "';";
+                if (dbMan.ExecuteScalar(colquery) != null)
+                {
+                    catID = (int)dbMan.ExecuteScalar(colquery);
+                }
+                else catID = -1;
+                query = "SELECT P.ProductName, P.Price, D.DesignImage,P.ProductID FROM Designs AS D,Products AS P WHERE P.Design_ID=D.DesignID AND P.Category_ID=" + catID + " GROUP BY P.ProductID, P.ProductName, P.Price, D.DesignImage;";
+            }
+            return dbMan.ExecuteReader(query);
+        }
+
+        public DataTable RetrieveAllDesData(int id)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT StockQuantity, Description FROM Products WHERE ProductID =" + id + ";";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public DataTable GetOrderHistory(string un)
+        {
+            string query = "SELECT P.ProductName, O.OrderDate, O.Status, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" + un + "';";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public DataTable GetPendingOrders(string un)
+        {
+            string query = "SELECT P.ProductName, O.OrderDate, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" + un + "' AND O.Status= 'Out For Delivery' ;";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public int TempUpdateStock(int quantity, string prod)
+        {
+            string query = "UPDATE Products SET StockQuantity = " + quantity + " WHERE ProductName = '" + prod + "';";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        public void ReturnProduct(string name, int quan)
+        {
+            string query = "UPDATE Products SET StockQuantity=StockQuantity+" + quan + "WHERE ProductName='" + name + "';";
+            dbMan.ExecuteNonQuery(query);
+        }
+        public int GetUserNoPass(string username)
+        {
+            string query = "SELECT UserID FROM Users WHERE UserName='" + username + "';";
+            if (dbMan.ExecuteScalar(query) != null)
+            {
+                return (int)dbMan.ExecuteScalar(query);
+            }
+            else return -1;
+        }
+
+        public string GetAddress(string username)
+        {
+            string query = "SELECT Address FROM Users WHERE UserName = '" + username + "';";
+            return dbMan.ExecuteScalar(query).ToString();
+        }
+        public DataTable GetCards(int ID)
+        {
+            string query = "SELECT EndsIn, CardNumber FROM CardDetails WHERE User_ID=" + ID + ";";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public bool SaveCardDetails(int userid, string holder, string hashnum, string hashcvv, int YEAR, int MONTH, int EndsIn)
+        {
+            string query = "INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES(" + userid + ",'" + holder + "','" + hashnum + "','" + hashcvv + "','" + YEAR + "/" + MONTH + "/31'," + EndsIn + ");";
+            return ((dbMan.ExecuteNonQuery(query) > 0));
+        }
+
+        public int AddOrder(int userid, string orderdate, decimal totalamount, string address, string deliverydate, ref int orderID)
+        {
+            string query = "INSERT INTO Orders VALUES(" + userid + ", 'user', '" + orderdate + "','out for delivery'," + totalamount + ",'" + address + "','" + deliverydate + "');";
+            int q1result = dbMan.ExecuteNonQuery(query);
+            string query2 = "SELECT OrderID FROM Orders WHERE User_ID = " + userid + " AND UserType = 'user' AND OrderDate = '" + orderdate + "' AND Status= 'out for delivery' AND TotalAmount= " + totalamount + " AND DeliveryAddress = '" + address + "' AND DeliveryDate = '" + deliverydate + "';";
+            if (q1result > 0)
+            {
+                orderID = (int)dbMan.ExecuteScalar(query2);
+            }
+            else { orderID = -1; }
+            return (q1result);
+        }
+
+        public int AddProdOrder(string prodName, int prodQ, int orderID)
+        {
+            string query = "SELECT ProductID FROM Products WHERE ProductName = '" + prodName + "';";
+            int prodID = (int)dbMan.ExecuteScalar(query);
+            string query2 = "INSERT INTO ProductOrders (Product_ID, Order_ID, Quantity)  VALUES(" + prodID + "," + orderID + "," + prodQ + ");";
+            return (int)dbMan.ExecuteNonQuery(query2);
+        }
+
+
+        public int DeleteAccount(int userid)
+        {
+            string query = "DELETE FROM Users WHERE UserID=" + userid + ";";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
+
+        public DataTable GetProductsFB()
+        {
+            string query = "SELECT ProductName FROM Products";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public int GetProdID(string pname)
+        {
+            string query = "SELECT ProductID FROM Products WHERE ProductName = '" + pname + "';";
+            return (int)dbMan.ExecuteNonQuery(query);
+        }
+        public int InsertFeedback(decimal rate,string message,int pid,string date,int userid)
+        {
+            string query;
+            if (pid <0)
+            {
+                 query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ");";
+            }
+            else
+            {
+                query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB,Product_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ","+pid+");";
             }
             return dbMan.ExecuteNonQuery(query);
         }
@@ -365,5 +603,24 @@ namespace Soleil_et_Soie
         }
 
 
+
+        //public int tempinsertdesign(byte[] tempdesign)
+        //{
+        //    string hexString = BitConverter.ToString(tempdesign).Replace("-", "");
+        //    string query = "UPDATE Designs SET DesignImage= 0x" + hexString + " WHERE DesignName='test2';";
+        //    return dbMan.ExecuteNonQuery(query);
+        //}
+        //public string autofillsubdate(string design)
+        //{
+
+        //}
+        //public string autofillcollection(string design)
+        //{
+
+        //}
+        //public string autofillcollection(string design)
+        //{ }
     }
+
 }
+

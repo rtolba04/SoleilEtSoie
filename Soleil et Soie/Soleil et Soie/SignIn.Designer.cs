@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignIn));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxUserName = new System.Windows.Forms.TextBox();
@@ -47,6 +48,8 @@
             this.labelError5 = new System.Windows.Forms.Label();
             this.labelError6 = new System.Windows.Forms.Label();
             this.labelError7 = new System.Windows.Forms.Label();
+            this.ShowPassPic = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowPassPic)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -80,6 +83,7 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(199, 116);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(229, 20);
             this.textBoxPassword.TabIndex = 3;
             // 
@@ -236,11 +240,24 @@
             this.labelError7.Text = "Phone Number Should Consist of 11 digits";
             this.labelError7.Visible = false;
             // 
+            // ShowPassPic
+            // 
+            this.ShowPassPic.Image = ((System.Drawing.Image)(resources.GetObject("ShowPassPic.Image")));
+            this.ShowPassPic.Location = new System.Drawing.Point(434, 116);
+            this.ShowPassPic.Name = "ShowPassPic";
+            this.ShowPassPic.Size = new System.Drawing.Size(32, 20);
+            this.ShowPassPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ShowPassPic.TabIndex = 19;
+            this.ShowPassPic.TabStop = false;
+            this.ShowPassPic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShowPassPic_MouseDown);
+            this.ShowPassPic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ShowPassPic_MouseUp);
+            // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(526, 349);
+            this.Controls.Add(this.ShowPassPic);
             this.Controls.Add(this.labelError7);
             this.Controls.Add(this.labelError6);
             this.Controls.Add(this.labelError5);
@@ -262,6 +279,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SignIn";
             this.Text = "SignIn";
+            ((System.ComponentModel.ISupportInitialize)(this.ShowPassPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,5 +306,6 @@
         private System.Windows.Forms.Label labelError5;
         private System.Windows.Forms.Label labelError6;
         private System.Windows.Forms.Label labelError7;
+        private System.Windows.Forms.PictureBox ShowPassPic;
     }
 }

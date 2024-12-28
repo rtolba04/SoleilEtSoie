@@ -58,6 +58,18 @@
     <Compile Include="admin_create_update_users.Designer.cs">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cart.Designer.cs">
+      <DependentUpon>Cart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Checkout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Checkout.Designer.cs">
+      <DependentUpon>Checkout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="detailed_rep.cs">
@@ -66,12 +78,22 @@
     <Compile Include="detailed_rep.Designer.cs">
       <DependentUpon>detailed_rep.cs</DependentUpon>
     </Compile>
+    <Compile Include="desediting.cs" />
+    <Compile Include="desediting.Designer.cs">
+      <DependentUpon>desediting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer.cs" />
+    <Compile Include="designerhome.cs" />
+    <Compile Include="designerhome.Designer.cs">
+      <DependentUpon>designerhome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Feedback.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Feedback.Designer.cs">
       <DependentUpon>Feedback.cs</DependentUpon>
     </Compile>
+
     <Compile Include="managerial_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +111,14 @@
     </Compile>
     <Compile Include="manage_prod.Designer.cs">
       <DependentUpon>manage_prod.cs</DependentUpon>
+      </Compile>
+
+    <Compile Include="ProductDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductDetails.Designer.cs">
+      <DependentUpon>ProductDetails.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
@@ -128,14 +158,33 @@
     <EmbeddedResource Include="admin_create_update_users.resx">
       <DependentUpon>admin_create_update_users.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="detailed_rep.resx">
       <DependentUpon>detailed_rep.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <EmbeddedResource Include="Cart.resx">
+      <DependentUpon>Cart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Checkout.resx">
+      <DependentUpon>Checkout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="desediting.resx">
+      <DependentUpon>desediting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designerhome.resx">
+      <DependentUpon>designerhome.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Feedback.resx">
       <DependentUpon>Feedback.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductDetails.resx">
+      <DependentUpon>ProductDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="managerial_report.resx">
       <DependentUpon>managerial_report.cs</DependentUpon>
@@ -166,6 +215,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserHomePage.resx">
       <DependentUpon>UserHomePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
