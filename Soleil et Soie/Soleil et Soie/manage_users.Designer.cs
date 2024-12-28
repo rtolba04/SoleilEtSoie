@@ -31,11 +31,11 @@
             this.create_user_button = new System.Windows.Forms.Button();
             this.getuserscombo = new System.Windows.Forms.ComboBox();
             this.select_user_label = new System.Windows.Forms.Label();
-            this.del_button = new System.Windows.Forms.Button();
             this.viewall_button = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dg = new System.Windows.Forms.DataGridView();
+            this.deluser_button = new System.Windows.Forms.Button();
+            this.deactivate_button = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             this.SuspendLayout();
             // 
             // create_user_button
@@ -44,7 +44,7 @@
             this.create_user_button.Name = "create_user_button";
             this.create_user_button.Size = new System.Drawing.Size(134, 51);
             this.create_user_button.TabIndex = 0;
-            this.create_user_button.Text = "Create admin/designer ";
+            this.create_user_button.Text = "Create/Update admin/designer ";
             this.create_user_button.UseVisualStyleBackColor = true;
             this.create_user_button.Click += new System.EventHandler(this.create_user_button_Click);
             // 
@@ -65,15 +65,6 @@
             this.select_user_label.TabIndex = 4;
             this.select_user_label.Text = "select user to delete:";
             // 
-            // del_button
-            // 
-            this.del_button.Location = new System.Drawing.Point(89, 422);
-            this.del_button.Name = "del_button";
-            this.del_button.Size = new System.Drawing.Size(128, 23);
-            this.del_button.TabIndex = 6;
-            this.del_button.Text = "Delete User";
-            this.del_button.UseVisualStyleBackColor = true;
-            // 
             // viewall_button
             // 
             this.viewall_button.Location = new System.Drawing.Point(537, 37);
@@ -82,43 +73,54 @@
             this.viewall_button.TabIndex = 8;
             this.viewall_button.Text = "View All Users";
             this.viewall_button.UseVisualStyleBackColor = true;
+            this.viewall_button.Click += new System.EventHandler(this.viewall_button_Click);
             // 
-            // dataGridView1
+            // dg
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(391, 82);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(448, 273);
-            this.dataGridView1.TabIndex = 9;
+            this.dg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg.Location = new System.Drawing.Point(391, 82);
+            this.dg.Name = "dg";
+            this.dg.RowHeadersWidth = 51;
+            this.dg.RowTemplate.Height = 24;
+            this.dg.Size = new System.Drawing.Size(448, 273);
+            this.dg.TabIndex = 9;
             // 
-            // button1
+            // deluser_button
             // 
-            this.button1.Location = new System.Drawing.Point(89, 258);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 23);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "delete user";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.deluser_button.Location = new System.Drawing.Point(96, 258);
+            this.deluser_button.Name = "deluser_button";
+            this.deluser_button.Size = new System.Drawing.Size(106, 23);
+            this.deluser_button.TabIndex = 27;
+            this.deluser_button.Text = "delete user";
+            this.deluser_button.UseVisualStyleBackColor = true;
+            this.deluser_button.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // deactivate_button
+            // 
+            this.deactivate_button.Location = new System.Drawing.Point(89, 300);
+            this.deactivate_button.Name = "deactivate_button";
+            this.deactivate_button.Size = new System.Drawing.Size(122, 23);
+            this.deactivate_button.TabIndex = 28;
+            this.deactivate_button.Text = "Deactivate user";
+            this.deactivate_button.UseVisualStyleBackColor = true;
+            this.deactivate_button.Click += new System.EventHandler(this.deactivate_button_Click);
             // 
             // manage_users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 537);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.deactivate_button);
+            this.Controls.Add(this.deluser_button);
+            this.Controls.Add(this.dg);
             this.Controls.Add(this.viewall_button);
-            this.Controls.Add(this.del_button);
             this.Controls.Add(this.select_user_label);
             this.Controls.Add(this.getuserscombo);
             this.Controls.Add(this.create_user_button);
             this.Name = "manage_users";
             this.Text = "manage_users";
             this.Load += new System.EventHandler(this.manage_users_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,9 +131,9 @@
         private System.Windows.Forms.Button create_user_button;
         private System.Windows.Forms.ComboBox getuserscombo;
         private System.Windows.Forms.Label select_user_label;
-        private System.Windows.Forms.Button del_button;
         private System.Windows.Forms.Button viewall_button;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dg;
+        private System.Windows.Forms.Button deluser_button;
+        private System.Windows.Forms.Button deactivate_button;
     }
 }
