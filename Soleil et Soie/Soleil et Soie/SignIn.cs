@@ -41,6 +41,16 @@ namespace Soleil_et_Soie
             string email;
             string gender;
             //validation checks
+            void ResetErrorLabels()
+            {
+                labelError1.Visible = false;
+                labelError2.Visible = false;
+                labelError3.Visible = false;
+                labelError4.Visible = false;
+                labelError5.Visible = false;
+                labelError6.Visible = false;
+                labelError7.Visible = false;
+            }
             if (int.TryParse(textBoxUserName.Text, out num)) //not digits only
             {
                 labelError2.Visible = false;
@@ -112,6 +122,7 @@ namespace Soleil_et_Soie
             }
             else
             {
+                ResetErrorLabels();
                 //sets user details for insert query
                 username = textBoxUserName.Text;
                 password = textBoxPassword.Text;

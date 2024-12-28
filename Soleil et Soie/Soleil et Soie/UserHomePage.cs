@@ -256,6 +256,8 @@ namespace Soleil_et_Soie
                     controllerObj.ReturnProduct(name, quantity);
                 }
             }
+            //logout
+            int result = controllerObj.LoggedOut(UsernameLabel.Text);
 
         }
     }
