@@ -416,13 +416,13 @@ namespace Soleil_et_Soie
         }
 
         //fucntion to turn bytearray from db to image
-        public Image ByteArraytoImage(byte[] imagebytes)
-        {
-            using (MemoryStream ms = new MemoryStream(imagebytes))
-            {
-                return Image.FromStream(ms);
-            }
-        }
+        //public Image ByteArraytoImage(byte[] imagebytes)
+        //{
+        //    using (MemoryStream ms = new MemoryStream(imagebytes))
+        //    {
+        //        return Image.FromStream(ms);
+        //    }
+        //}
         
 
         //FOR TESTING
@@ -549,9 +549,9 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
-        public int submitDesign(string name, string cat, int desid, string sdate)
+        public int submitDesign(string name, int cat, int desid, string sdate)
         {
-            string query = "INSERT INTO Designs (DesignName, ApprovalDate, ApprovalStatus, Designer_ID, SubmissionDate)  VALUES ('"+ name+"', '"+sdate+"', 'Pending', '"+desid+"', '"+sdate+"');";
+            string query = "INSERT INTO Designs (DesignName, ApprovalDate, ApprovalStatus, Designer_ID, SubmissionDate,DesignCategory_ID)  VALUES ('" + name+"', '"+sdate+"', 'Pending', '"+desid+"', '"+sdate+"',"+cat+");";
             return (int)dbMan.ExecuteNonQuery(query);
         }
         public int submitDesignPic(string desname, byte[] imgbytes)
@@ -601,10 +601,10 @@ namespace Soleil_et_Soie
             string query = "SELECT Product_ID, ProductName, Quantity FROM Products AND ProductOrders WHERE Products(ProductID)=ProductOrders(Product_ID) GROUP BY ProductOrders(Product_ID) DESC";
             return dbMan.ExecuteReader(query);
         }
-        public int updatedesign(string desname, int cat, string description, string material, int mats)
-        { 
-            string query = "UPDATE Designs SET DesignCategory='" + desname + "', DesignCategory_ID= '"+cat+"', Description='"+description+"', Mat
-        }
+        //public int updatedesign(string desname, int cat, string description, string material, int mats)
+        //{ 
+        //    string query = "UPDATE Designs SET DesignCategory='" + desname + "', DesignCategory_ID= '"+cat+"', Description='"+description+"', Mat
+        //}
 
   
         public int del_feed(int feed_id)

@@ -99,9 +99,10 @@ namespace Soleil_et_Soie
 
             else
             {
+                int catid=obj.getcatid(category.Text);
                 byte[] imgBytes = ConvertImageToBytes(picbox.Image);
 
-                int y = obj.submitDesign(designname.Text, mats.Text, designerid, subdate.Text);
+                int y = obj.submitDesign(designname.Text, catid, designerid, subdate.Text);
                 int z = obj.submitDesignPic(designname.Text, imgBytes);
                 if ((y != 0)&&(z!=0))
                 {

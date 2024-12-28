@@ -69,7 +69,6 @@ namespace Soleil_et_Soie
                     }
                     else if (type == "designer")
                     {
-                        
                         int desID = controllerObj.GetUserID(textBoxUserName.Text, hashed);
                         designerhomepage designerhome = new designerhomepage(textBoxUserName.Text, desID);
                         designerhome.Show();
