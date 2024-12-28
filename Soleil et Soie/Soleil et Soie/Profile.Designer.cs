@@ -57,6 +57,7 @@
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.textBoxExpDateMonth = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -297,12 +298,23 @@
             this.label13.TabIndex = 27;
             this.label13.Text = "/";
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(32, 291);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(128, 23);
+            this.buttonDelete.TabIndex = 28;
+            this.buttonDelete.Text = "Delete Account";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LavenderBlush;
             this.ClientSize = new System.Drawing.Size(705, 366);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.textBoxExpDateMonth);
             this.Controls.Add(this.buttonUpdate);
@@ -371,5 +383,6 @@
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.TextBox textBoxExpDateMonth;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

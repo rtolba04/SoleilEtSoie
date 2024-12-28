@@ -249,5 +249,13 @@ namespace Soleil_et_Soie
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            int result = controllerObj.DeleteAccount(userid);
+            if (result == 0) { MessageBox.Show("Couldnot Delete Account"); } else 
+            { MessageBox.Show("Solie et Soie Family will miss you");
+              Application.Exit() ; }
+        }
     }
 }

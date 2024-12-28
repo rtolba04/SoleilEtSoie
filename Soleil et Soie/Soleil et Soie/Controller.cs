@@ -27,9 +27,10 @@ namespace Soleil_et_Soie
             dbMan.CloseConnection();
         }
 
-        public bool GetLogin(string username, string password,ref string type) {
-            string typequery = "SELECT UserType FROM Users WHERE UserName ='" +username +"';";
-            string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" +username +"' AND Password ='" +password+"';";
+        public bool GetLogin(string username, string password, ref string type)
+        {
+            string typequery = "SELECT UserType FROM Users WHERE UserName ='" + username + "';";
+            string query = "SELECT COUNT(UserName) FROM Users WHERE UserName ='" + username + "' AND Password ='" + password + "';";
             int result = (int)dbMan.ExecuteScalar(query);
             if (result == 1)
             {
@@ -41,7 +42,7 @@ namespace Soleil_et_Soie
         public int GetUserID(string username, string password)
         {
             string query = "SELECT UserID FROM Users WHERE UserName ='" + username + "' AND Password ='" + password + "';";
-            int id=(int)dbMan.ExecuteScalar(query);
+            int id = (int)dbMan.ExecuteScalar(query);
             return id;
 
         }
@@ -53,10 +54,11 @@ namespace Soleil_et_Soie
             {
                 query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email ,DateCreated, UserType, Status )VALUES ('" + un + "','" + pw + "'," + pn + " ,'" + e + "','" + dc + "' , 'user' , 'Logged In' );";
 
-;
+                ;
             }
-            else {
-                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','"+dc+"', 'user', 'Logged In', '"+g+"');";
+            else
+            {
+                query = "INSERT INTO Users (UserName, Password, PhoneNumber, Email,DateCreated, UserType, Status, Gender )VALUES ('" + un + "','" + pw + "'," + pn + ",'" + e + "','" + dc + "', 'user', 'Logged In', '" + g + "');";
             }
             return dbMan.ExecuteNonQuery(query);
         }
@@ -70,7 +72,7 @@ namespace Soleil_et_Soie
             string query = "SELECT DesignName FROM Designs;";
             return dbMan.ExecuteReader(query);
         }
-        public string autofillcat(string design )
+        public string autofillcat(string design)
         {
             string query = "SELECT Category FROM Category AND Designs WHERE ;";
             return dbMan.ExecuteReader(query).ToString();
@@ -93,7 +95,7 @@ namespace Soleil_et_Soie
             string query = "SELECT * FROM Users WHERE UserName = '" + username + "';";
             return dbMan.ExecuteReader(query);
         }
-        public int UpdateUserDetails(string un, int id, string pw, long pn, string a, string e,string dc, string ut, string s, string g)
+        public int UpdateUserDetails(string un, int id, string pw, long pn, string a, string e, string dc, string ut, string s, string g)
         {
             string query;
             if (a == "NULL" && g == "NULL")
@@ -118,21 +120,22 @@ namespace Soleil_et_Soie
         }
 
         //takes byte array, converts it to hexstring, inserts it into db
-        public int ChangeProfile(string username,byte[] imagebytes)
+        public int ChangeProfile(string username, byte[] imagebytes)
         {
             string hexString = BitConverter.ToString(imagebytes).Replace("-", "");
-            string query = "UPDATE Users SET ProfilePicture= 0x"+hexString+ " WHERE UserName='"+username+"';";
+            string query = "UPDATE Users SET ProfilePicture= 0x" + hexString + " WHERE UserName='" + username + "';";
             return dbMan.ExecuteNonQuery(query);
 
         }
         //retrieves bytearray from db
-        public void ProfilePicture(string username,ref byte[] imgbytes) {
+        public void ProfilePicture(string username, ref byte[] imgbytes)
+        {
             string query = "SELECT ProfilePicture FROM Users WHERE UserName='" + username + "';";
             if (dbMan.ExecuteScalar(query) != DBNull.Value)
             {
                 imgbytes = (byte[])dbMan.ExecuteScalar(query);
             }
-            else imgbytes= null;
+            else imgbytes = null;
         }
         public DataTable GetProducts()
         {
@@ -144,13 +147,13 @@ namespace Soleil_et_Soie
         public DataTable RetrieveAllDesData(int id)
         {
             DataTable dt = new DataTable();
-            string query = "SELECT StockQuantity, Description FROM Products WHERE ProductID =" +id+ ";";
-            return dbMan.ExecuteReader(query) ;
-        } 
+            string query = "SELECT StockQuantity, Description FROM Products WHERE ProductID =" + id + ";";
+            return dbMan.ExecuteReader(query);
+        }
 
         public DataTable GetOrderHistory(string un)
         {
-            string query="SELECT P.ProductName, O.OrderDate, O.Status, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" +un+ "';";
+            string query = "SELECT P.ProductName, O.OrderDate, O.Status, O.TotalAmount, O.DeliveryDate FROM Products AS P, Orders AS O, ProductOrders AS PO, Users AS U WHERE PO.Product_ID = P.ProductID AND PO.Order_ID=O.OrderID AND O.User_ID=U.UserID AND U.UserName= '" + un + "';";
             return dbMan.ExecuteReader(query);
         }
 
@@ -166,7 +169,7 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteNonQuery(query);
         }
 
-        public void ReturnProduct(string name,int quan)
+        public void ReturnProduct(string name, int quan)
         {
             string query = "UPDATE Products SET StockQuantity=StockQuantity+" + quan + "WHERE ProductName='" + name + "';";
             dbMan.ExecuteNonQuery(query);
@@ -192,18 +195,19 @@ namespace Soleil_et_Soie
             return dbMan.ExecuteReader(query);
         }
 
-        public bool SaveCardDetails(int userid,string holder,string hashnum,string hashcvv,int YEAR,int MONTH,int EndsIn)
+        public bool SaveCardDetails(int userid, string holder, string hashnum, string hashcvv, int YEAR, int MONTH, int EndsIn)
         {
             string query = "INSERT INTO CardDetails(User_ID,CardHolder,CardNumber,CVV,ExpDate,EndsIn) VALUES(" + userid + ",'" + holder + "','" + hashnum + "','" + hashcvv + "','" + YEAR + "/" + MONTH + "/31'," + EndsIn + ");";
             return ((dbMan.ExecuteNonQuery(query) > 0));
         }
 
-        public int AddOrder(int userid, string orderdate, decimal totalamount, string address,string deliverydate, ref int orderID)
+        public int AddOrder(int userid, string orderdate, decimal totalamount, string address, string deliverydate, ref int orderID)
         {
-            string query = "INSERT INTO Orders VALUES("+userid+", 'user', '"+orderdate+"','out for delivery',"+totalamount+",'"+address+"','"+deliverydate+"');";
+            string query = "INSERT INTO Orders VALUES(" + userid + ", 'user', '" + orderdate + "','out for delivery'," + totalamount + ",'" + address + "','" + deliverydate + "');";
             int q1result = dbMan.ExecuteNonQuery(query);
-            string query2 = "SELECT OrderID FROM Orders WHERE User_ID = "+userid+" AND UserType = 'user' AND OrderDate = '"+orderdate+"' AND Status= 'out for delivery' AND TotalAmount= "+totalamount+" AND DeliveryAddress = '"+address+"' AND DeliveryDate = '"+deliverydate+"';";
-            if (q1result > 0) {
+            string query2 = "SELECT OrderID FROM Orders WHERE User_ID = " + userid + " AND UserType = 'user' AND OrderDate = '" + orderdate + "' AND Status= 'out for delivery' AND TotalAmount= " + totalamount + " AND DeliveryAddress = '" + address + "' AND DeliveryDate = '" + deliverydate + "';";
+            if (q1result > 0)
+            {
                 orderID = (int)dbMan.ExecuteScalar(query2);
             }
             else { orderID = -1; }
@@ -215,7 +219,15 @@ namespace Soleil_et_Soie
             string query = "SELECT ProductID FROM Products WHERE ProductName = '" + prodName + "';";
             int prodID = (int)dbMan.ExecuteScalar(query);
             string query2 = "INSERT INTO ProductOrders (Product_ID, Order_ID, Quantity)  VALUES(" + prodID + "," + orderID + "," + prodQ + ");";
-            return (int)dbMan.ExecuteNonQuery(query2); 
+            return (int)dbMan.ExecuteNonQuery(query2);
+        }
+
+
+        public int DeleteAccount(int userid)
+        {
+            string query = "DELETE FROM Users WHERE UserID=" + userid + ";";
+            return dbMan.ExecuteNonQuery(query);
+
         }
 
         public DataTable GetProductsFB()
@@ -238,6 +250,7 @@ namespace Soleil_et_Soie
         }
 
     } 
+
         //public int tempinsertdesign(byte[] tempdesign)
         //{
         //    string hexString = BitConverter.ToString(tempdesign).Replace("-", "");
@@ -255,5 +268,6 @@ namespace Soleil_et_Soie
         //public string autofillcollection(string design)
         //{ }
     }
+}
 
 
