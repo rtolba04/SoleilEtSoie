@@ -83,8 +83,15 @@ namespace Soleil_et_Soie
 
         private void buttonCheckOut_Click(object sender, EventArgs e)
         {
-            checkout = new Checkout(this,Username);
-            checkout.Show();
+            if (items.Count>0)
+            {
+                checkout = new Checkout(this, Username);
+                checkout.Show();
+            }
+            else
+            {
+                MessageBox.Show("Cart is Empty");
+            }
         }
     }
     public class CartItem

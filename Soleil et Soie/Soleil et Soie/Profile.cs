@@ -116,7 +116,8 @@ namespace Soleil_et_Soie
             }
             else
             {
-                password = textBoxPass.Text;
+                password = Hash(textBoxPass.Text);
+
             }
             if (textBoxPhone.Text=="")
             {
@@ -147,8 +148,8 @@ namespace Soleil_et_Soie
             {
                 email = textBoxEmail.Text;
             }
-            string hashedpass=HashPassword(password);
-            int result = controllerObj.UpdateUserDetails(username,userid,hashedpass,phoneno,address,email,date,usertype,status,gender);
+            //string hashedpass=HashPassword(password);
+            int result = controllerObj.UpdateUserDetails(username,userid,password,phoneno,address,email,date,usertype,status,gender);
             if(result == 0)
             {
                 MessageBox.Show("Could Not Update Info, Please Contact Our Customer Support!");

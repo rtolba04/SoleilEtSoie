@@ -31,6 +31,7 @@ namespace Soleil_et_Soie
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+
         private void buttonSignIn_Click(object sender, EventArgs e)
         {
             int num;
@@ -148,6 +149,16 @@ namespace Soleil_et_Soie
                     userhomepage.Show();
                 };
             }
+        }
+
+        private void ShowPassPic_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '\0';
+        }
+
+        private void ShowPassPic_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBoxPassword.PasswordChar = '*';
         }
     }
 }
