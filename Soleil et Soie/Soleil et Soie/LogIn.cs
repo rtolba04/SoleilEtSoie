@@ -46,6 +46,7 @@ namespace Soleil_et_Soie
             }
             else
             {
+                labelError.Visible = false;
                 int result = controllerObj.LoggedIn(textBoxUserName.Text);
                 if(result == 0)
                 {

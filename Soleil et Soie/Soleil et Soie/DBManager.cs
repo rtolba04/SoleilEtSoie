@@ -5,7 +5,6 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace Soleil_et_Soie
 {
@@ -13,8 +12,8 @@ namespace Soleil_et_Soie
     {
         //TODO: Make Sure to change Connection String to your Database 
 
-        static string DB_Connection_String = @"Data Source=DESKTOP-2TG7350\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True";
-        SqlConnection myConnection; 
+        static string DB_Connection_String = @"Data Source=DESKTOP-DP92LNP\SQLEXPRESS;Initial Catalog=SoleiletSoie;Integrated Security=True;Encrypt=False";
+        SqlConnection myConnection;
 
         public DBManager()
         {
