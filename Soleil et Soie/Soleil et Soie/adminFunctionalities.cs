@@ -40,7 +40,7 @@ namespace Soleil_et_Soie
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Feedback f  = new Feedback();   
+            FeedBackadmin f  = new FeedBackadmin();   
             f.Show();
         }
 

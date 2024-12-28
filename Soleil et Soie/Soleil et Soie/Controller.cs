@@ -105,6 +105,7 @@ namespace Soleil_et_Soie
             {
                 query = $"insert into Users(UserName,Password,PhoneNumber,Email,DateCreated,UserType,Status) values('{un}','{pw}',{pn},'{e}','{dc}','{ut}','active');";
             }
+            return dbMan.ExecuteNonQuery(query);
         }
         public int LoggedOut(string username)
         {
