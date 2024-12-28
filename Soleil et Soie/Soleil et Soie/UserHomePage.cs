@@ -327,6 +327,13 @@ namespace Soleil_et_Soie
             DisplayImages(2, buttonFall.Text);
             ProductsLayout.BringToFront();
         }
+
+        private void buttonReturnToHome_Click(object sender, EventArgs e)
+        {
+            ProductsLayout.Controls.Clear();
+            DisplayImages(0, "");
+            ProductsLayout.BringToFront();
+        }
     }
     //class to hold imageinfo retrieved from db
     public class ImageInfo //public so that it can be used in ProductDetailsForm

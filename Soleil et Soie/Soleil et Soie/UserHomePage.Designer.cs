@@ -50,6 +50,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SortLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductsLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonReturnToHome = new System.Windows.Forms.Button();
             this.NavBarlayout.SuspendLayout();
             this.CategLayout.SuspendLayout();
             this.CollectionsLayOut.SuspendLayout();
@@ -60,6 +61,7 @@
             // NavBarlayout
             // 
             this.NavBarlayout.BackColor = System.Drawing.Color.Thistle;
+            this.NavBarlayout.Controls.Add(this.buttonReturnToHome);
             this.NavBarlayout.Controls.Add(this.CategButton);
             this.NavBarlayout.Controls.Add(this.CategLayout);
             this.NavBarlayout.Controls.Add(this.CollectionsButton);
@@ -79,7 +81,7 @@
             // 
             this.CategButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CategButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.CategButton.Location = new System.Drawing.Point(6, 4);
+            this.CategButton.Location = new System.Drawing.Point(6, 37);
             this.CategButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategButton.Name = "CategButton";
             this.CategButton.Size = new System.Drawing.Size(149, 27);
@@ -96,7 +98,7 @@
             this.CategLayout.Controls.Add(this.buttonShoes);
             this.CategLayout.Controls.Add(this.buttonJewelry);
             this.CategLayout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CategLayout.Location = new System.Drawing.Point(6, 35);
+            this.CategLayout.Location = new System.Drawing.Point(6, 68);
             this.CategLayout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CategLayout.Name = "CategLayout";
             this.CategLayout.Size = new System.Drawing.Size(153, 117);
@@ -154,7 +156,7 @@
             // 
             this.CollectionsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CollectionsButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.CollectionsButton.Location = new System.Drawing.Point(6, 156);
+            this.CollectionsButton.Location = new System.Drawing.Point(6, 189);
             this.CollectionsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CollectionsButton.Name = "CollectionsButton";
             this.CollectionsButton.Size = new System.Drawing.Size(149, 23);
@@ -171,7 +173,7 @@
             this.CollectionsLayOut.Controls.Add(this.buttonWinter);
             this.CollectionsLayOut.Controls.Add(this.buttonFall);
             this.CollectionsLayOut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CollectionsLayOut.Location = new System.Drawing.Point(6, 183);
+            this.CollectionsLayOut.Location = new System.Drawing.Point(6, 216);
             this.CollectionsLayOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CollectionsLayOut.Name = "CollectionsLayOut";
             this.CollectionsLayOut.Size = new System.Drawing.Size(153, 120);
@@ -230,7 +232,7 @@
             // 
             this.OrdersButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.OrdersButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.OrdersButton.Location = new System.Drawing.Point(6, 307);
+            this.OrdersButton.Location = new System.Drawing.Point(6, 340);
             this.OrdersButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OrdersButton.Name = "OrdersButton";
             this.OrdersButton.Size = new System.Drawing.Size(149, 23);
@@ -243,7 +245,7 @@
             // 
             this.FeedBackButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FeedBackButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.FeedBackButton.Location = new System.Drawing.Point(6, 334);
+            this.FeedBackButton.Location = new System.Drawing.Point(6, 367);
             this.FeedBackButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FeedBackButton.Name = "FeedBackButton";
             this.FeedBackButton.Size = new System.Drawing.Size(149, 23);
@@ -256,7 +258,7 @@
             // 
             this.LogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.LogoutButton.BackColor = System.Drawing.Color.LavenderBlush;
-            this.LogoutButton.Location = new System.Drawing.Point(6, 361);
+            this.LogoutButton.Location = new System.Drawing.Point(6, 394);
             this.LogoutButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogoutButton.Name = "LogoutButton";
             this.LogoutButton.Size = new System.Drawing.Size(149, 27);
@@ -324,6 +326,20 @@
             this.ProductsLayout.Size = new System.Drawing.Size(560, 476);
             this.ProductsLayout.TabIndex = 5;
             // 
+            // buttonReturnToHome
+            // 
+            this.buttonReturnToHome.AutoSize = true;
+            this.buttonReturnToHome.BackColor = System.Drawing.Color.LavenderBlush;
+            this.buttonReturnToHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonReturnToHome.Location = new System.Drawing.Point(6, 4);
+            this.buttonReturnToHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonReturnToHome.Name = "buttonReturnToHome";
+            this.buttonReturnToHome.Size = new System.Drawing.Size(149, 29);
+            this.buttonReturnToHome.TabIndex = 7;
+            this.buttonReturnToHome.Text = "Return to homepage";
+            this.buttonReturnToHome.UseVisualStyleBackColor = false;
+            this.buttonReturnToHome.Click += new System.EventHandler(this.buttonReturnToHome_Click);
+            // 
             // UserHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -375,5 +391,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel SortLayout;
         private System.Windows.Forms.FlowLayoutPanel ProductsLayout;
+        private System.Windows.Forms.Button buttonReturnToHome;
     }
 }
