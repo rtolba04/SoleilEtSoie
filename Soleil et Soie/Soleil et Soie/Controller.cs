@@ -260,15 +260,21 @@ namespace Soleil_et_Soie
 
         public DataTable GetProductsFB()
         {
-            string query = "SELECT ProductID,ProductName FROM Products";
+            string query = "SELECT ProductName FROM Products";
             return dbMan.ExecuteReader(query);
+        }
+
+        public int GetProdID(string pname)
+        {
+            string query = "SELECT ProductID FROM Products WHERE ProductName = '" + pname + "';";
+            return (int)dbMan.ExecuteNonQuery(query);
         }
         public int InsertFeedback(decimal rate,string message,int pid,string date,int userid)
         {
             string query;
-            if (pid == -1)
+            if (pid <0)
             {
-                query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ");";
+                 query = "INSERT INTO Feedback(Rating,FeedbackDate,Comment,User_FB) VALUES(" + rate + ",'" + date + "','" + message + "'," + userid + ");";
             }
             else
             {
