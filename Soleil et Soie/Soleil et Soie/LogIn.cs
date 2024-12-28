@@ -39,7 +39,7 @@ namespace Soleil_et_Soie
         {
             string type="";
             string hashed = HashPassword(textBoxPass.Text);
-            bool exists = controllerObj.GetLogin(textBoxUserName.Text, hashed,ref type);
+            bool exists = controllerObj.GetLogin(textBoxUserName.Text, hashed, ref type);
             if (!exists)
             {
                 labelError.Visible = true;
@@ -67,15 +67,16 @@ namespace Soleil_et_Soie
                         adminFunctionalities f = new adminFunctionalities();
                         f.Show();
                     }
-                    //else if (type == "designer")
-                    //{
-                    //int desID = controllerObj.GetUserID(textBoxUserName.Text, textBoxPass.Text);
-                    //designerhome designerhome = new designerhome( textBoxUserName.Text, desID);
-                    //designerhome.Show();
-                    //// designer des = new designer();
-                    ////des.Show();
-                    //}
-                    
+                    else if (type == "designer")
+                    {
+                        
+                        int desID = controllerObj.GetUserID(textBoxUserName.Text, hashed);
+                        designerhomepage designerhome = new designerhomepage(textBoxUserName.Text, desID);
+                        designerhome.Show();
+                        // designer des = new designer();
+                        //des.Show();
+                    }
+
                 }   
             }
         }

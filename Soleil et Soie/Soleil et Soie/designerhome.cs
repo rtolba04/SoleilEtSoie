@@ -17,7 +17,7 @@
 //        public designerhome(string designer, int id)
 //        {
 //            InitializeComponent();
-//            label2.Text= "Hello " + designer + ",";
+//            label2.Text = "Hello " + designer + ",";
 //            desName = designer;
 //            desID = id;
 //        }
@@ -29,7 +29,7 @@
 
 //        private void button1_Click(object sender, EventArgs e)
 //        {
-//            designer des = new designer(desID,desName);
+//            designer des = new designer(desID, desName);
 //            des.Show();
 //        }
 //    }

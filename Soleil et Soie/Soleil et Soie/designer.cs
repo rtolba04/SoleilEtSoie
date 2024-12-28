@@ -47,8 +47,8 @@
 
 //        private void button3_Click(object sender, EventArgs e)
 //        {
-//            picbox.Image=null;
-//            picbox.ImageLocation=null;
+//            picbox.Image = null;
+//            picbox.ImageLocation = null;
 //        }
 //        public byte[] ImageToByteArray(Image imageIn)
 //        {
@@ -60,7 +60,7 @@
 //        private void submitDesign_Click(object sender, EventArgs e)
 //        {
 //            int x = 0;
-//            if(designName.Text==null)
+//            if (designName.Text == null)
 //            {
 //                MessageBox.Show("Enter Design Name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 //                return;
@@ -80,17 +80,17 @@
 //                MessageBox.Show("Enter Design", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 //                return;
 //            }
-           
-            
-            
-            
-//            MessageBox.Show("Please select image again", "",MessageBoxButtons.OK);
+
+
+
+
+//            MessageBox.Show("Please select image again", "", MessageBoxButtons.OK);
 //            OpenFileDialog dialog = new OpenFileDialog();
-//            string imglocation ="";
+//            string imglocation = "";
 //            dialog.Filter = "jpg files (*.jpg)|*.jpg| PNG files (*.png)|*.png| All files (*.*)|*.*";
 //            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 //            {
-//                imglocation = dialog.FileName; 
+//                imglocation = dialog.FileName;
 //            }
 //            byte[] imageBytes = File.ReadAllBytes(imglocation);
 //            DateTime time = DateTime.Now;
@@ -105,5 +105,23 @@
 //        {
 
 //        }
-//}
+
+//        private void InitializeComponent()
+//        {
+//            this.SuspendLayout();
+//            // 
+//            // designer
+//            // 
+//            this.ClientSize = new System.Drawing.Size(731, 453);
+//            this.Name = "designer";
+//            this.Load += new System.EventHandler(this.designer_Load);
+//            this.ResumeLayout(false);
+
+//        }
+
+//        private void designer_Load(object sender, EventArgs e)
+//        {
+
+//        }
+//    }
 //}
