@@ -15,13 +15,13 @@ namespace Soleil_et_Soie
     {
         Controller controllerObj;
         DataTable products;
-        int prodid,UserID;
+        int UserID;
+        string prodname;
         public Feedback(int userid)
         {
             InitializeComponent();
             controllerObj= new Controller();
             products = new DataTable();
-            prodid = -1;
             UserID = userid;
         }
 
@@ -30,7 +30,6 @@ namespace Soleil_et_Soie
             products = controllerObj.GetProductsFB();
             comboBoxProductFB.DataSource = products;
             comboBoxProductFB.DisplayMember = "ProductName";
-            comboBoxProductFB.ValueMember = "ProductID";
             comboBoxProductFB.Refresh();
         }
 
@@ -40,7 +39,8 @@ namespace Soleil_et_Soie
             string message = textBoxFeedback.Text;
             DateTime dateD= DateTime.Now;
             string date= dateD.ToString("yyyy-MM-dd");
-            int result=controllerObj.InsertFeedback(rating, message, prodid,date,UserID);
+            int pid= controllerObj.GetProdID(prodname);
+            int result=controllerObj.InsertFeedback(rating, message, pid,date,UserID);
             if (result > 0) MessageBox.Show("Your message has been sent! Thank you.");
             else MessageBox.Show("Failed to send feedback");
         }
@@ -49,8 +49,9 @@ namespace Soleil_et_Soie
         {
             if (comboBoxProductFB.SelectedValue != null)
             {
-                prodid = Convert.ToInt32(comboBoxProductFB.SelectedValue);
+                prodname = comboBoxProductFB.SelectedValue.ToString();
             }
+
         }
     }
 }
